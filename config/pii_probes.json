@@ -1,0 +1,104 @@
+{
+  "_comment": "PII 筛查对抗探针集（2026-08-25 建立，只增不改）。三层结构：baseline=常规写法必须识别；false_positive=绝不能误脱敏（药品/亲属称谓/医学词）；miss_risk=规则天然盲区（无提示词的姓名写法）。expect=应检出的实体（type+value 双匹配），must_keep=脱敏后必须原样保留的子串（误报防线）。断言见 scripts/test_pii.py",
+  "probes": [
+    {"id": "PII-01", "layer": "baseline",
+     "input": "患者张三，电话13800138000，吃二甲双胍后腹泻",
+     "expect": [{"type": "name", "value": "张三"}, {"type": "phone", "value": "13800138000"}],
+     "must_keep": ["二甲双胍"]},
+
+    {"id": "PII-02", "layer": "baseline",
+     "input": "患者李四，病历号M2024082201，咨询阿托伐他汀用法",
+     "expect": [{"type": "name", "value": "李四"}, {"type": "medical_record_id", "value": "M2024082201"}],
+     "must_keep": ["阿托伐他汀"]},
+
+    {"id": "PII-03", "layer": "baseline",
+     "input": "身份证号110101199001011234，想问胰岛素剂量",
+     "expect": [{"type": "id_card", "value": "110101199001011234"}],
+     "must_keep": ["胰岛素"]},
+
+    {"id": "PII-04", "layer": "baseline",
+     "input": "我在北京市海淀区中关村大街1号，想问二甲双胍剂量",
+     "expect": [{"type": "address"}],
+     "must_keep": ["二甲双胍"]},
+
+    {"id": "PII-05", "layer": "baseline",
+     "input": "我的邮箱是zhangsan@example.com，咨询用药",
+     "expect": [{"type": "email", "value": "zhangsan@example.com"}],
+     "must_keep": ["咨询用药"]},
+
+    {"id": "PII-06", "layer": "false_positive",
+     "input": "我爷爷吃二甲双胍后头晕",
+     "expect": [],
+     "must_keep": ["爷爷", "二甲双胍"]},
+
+    {"id": "PII-07", "layer": "false_positive",
+     "input": "服用安宫牛黄丸后不适",
+     "expect": [],
+     "must_keep": ["安宫牛黄丸"]},
+
+    {"id": "PII-08", "layer": "false_positive",
+     "input": "二甲双胍和格列美脲能一起吃吗",
+     "expect": [],
+     "must_keep": ["二甲双胍", "格列美脲"]},
+
+    {"id": "PII-09", "layer": "false_positive",
+     "input": "门诊医生说是二甲双胍的问题",
+     "expect": [],
+     "must_keep": ["门诊医生", "二甲双胍"]},
+
+    {"id": "PII-10", "layer": "false_positive",
+     "input": "患者家属询问司美格鲁肽减肥适应症",
+     "expect": [],
+     "must_keep": ["家属", "司美格鲁肽"]},
+
+    {"id": "PII-11", "layer": "miss_risk",
+     "input": "王五 13800138001，想问胰岛素剂量",
+     "expect": [{"type": "name", "value": "王五"}, {"type": "phone", "value": "13800138001"}],
+     "must_keep": ["胰岛素"]},
+
+    {"id": "PII-12", "layer": "miss_risk",
+     "input": "欧阳锋 13912345678 用药咨询",
+     "expect": [{"type": "name", "value": "欧阳锋"}, {"type": "phone", "value": "13912345678"}],
+     "must_keep": ["用药咨询"]},
+
+    {"id": "PII-13", "layer": "miss_risk",
+     "input": "张女士吃司美格鲁肽后出现恶心",
+     "expect": [{"type": "name", "value": "张女士"}],
+     "must_keep": ["司美格鲁肽"]},
+
+    {"id": "PII-14", "layer": "baseline",
+     "input": "住院号：ZY2024001234，患者目前稳定",
+     "expect": [{"type": "medical_record_id", "value": "ZY2024001234"}],
+     "must_keep": ["患者目前稳定"]},
+
+    {"id": "PII-15", "layer": "miss_risk",
+     "input": "我姓王，吃阿托伐他汀",
+     "expect": [{"type": "name", "value": "王"}],
+     "must_keep": ["阿托伐他汀"]},
+
+    {"id": "PII-16", "layer": "miss_risk",
+     "input": "孩子王小明吃了连花清瘟",
+     "expect": [{"type": "name", "value": "王小明"}],
+     "must_keep": ["连花清瘟"]},
+
+    {"id": "PII-17", "layer": "baseline",
+     "input": "电话13800138000",
+     "expect": [{"type": "phone", "value": "13800138000"}],
+     "must_keep": []},
+
+    {"id": "PII-18", "layer": "baseline",
+     "input": "地址：广东省深圳市南山区科技园1栋，想问用药",
+     "expect": [{"type": "address"}],
+     "must_keep": ["想问用药"]},
+
+    {"id": "PII-19", "layer": "baseline",
+     "input": "身份证：110101199001011234，手机号：13900001111",
+     "expect": [{"type": "id_card", "value": "110101199001011234"}, {"type": "phone", "value": "13900001111"}],
+     "must_keep": []},
+
+    {"id": "PII-20", "layer": "miss_risk",
+     "input": "患者王小明（电话13800138000，病历号M12345678），服用二甲双胍",
+     "expect": [{"type": "name", "value": "王小明"}, {"type": "phone", "value": "13800138000"}, {"type": "medical_record_id", "value": "M12345678"}],
+     "must_keep": ["二甲双胍"]}
+  ]
+}

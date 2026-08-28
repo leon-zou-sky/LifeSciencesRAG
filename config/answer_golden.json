@@ -1,0 +1,42 @@
+{
+  "_comment": "生成层冒烟探针（2026-08-18 建立）。断言终态 disposition 而非文本内容——LLM 输出不可 diff，验证手段是断言（见 citation_check.py 模块docstring）。探针只增不改，与 calibration_pairs 同规约。注意：本集是冒烟性质，暂不进 PQ 门禁——qwen3:4b 小模型行为有长尾波动，先积累 trace 观察稳定性，达标后纳入回归。",
+  "model": "qwen3:4b",
+  "probes": [
+    {
+      "id": "ANS-01",
+      "question": "阿托伐他汀可以和红霉素联用吗",
+      "expect_disposition": "standard_answer",
+      "why": "判重短路：该问题与库内 approved 标准答案相似度高于判重线，LLM 不应出场（标准答案优先于生成，口径一致性靠复用不靠重生成）"
+    },
+    {
+      "id": "ANS-02",
+      "question": "二甲双胍和乳酸酸中毒的关系",
+      "expect_disposition": "draft_passed",
+      "why": "正常起草路径：库内有二甲双胍说明书/指南原文，草稿应通过引用校验（引用合法+后缀完整）"
+    },
+    {
+      "id": "ANS-03",
+      "question": "连花清瘟胶囊可以治疗流感吗",
+      "expect_disposition": "insufficient_evidence",
+      "why": "拒答边界：库中无连花清瘟任何资料，模型应输出【证据不足】而非凭参数知识硬答—— grounded 约束的负对照探针"
+    },
+    {
+      "id": "ANS-04",
+      "question": "布洛芬缓释胶囊可以空腹吃吗",
+      "expect_disposition": "insufficient_evidence",
+      "why": "资格闸守卫探针：完全无关类实测最高分的漏网形态（0.5431，用法用量句式撞说明书文体）——闸线 0.60 重锚后必须拦截；它若过闸说明分数分布漂移，闸线需重标"
+    },
+    {
+      "id": "ANS-05",
+      "question": "二甲双胍和布洛芬能一起吃吗",
+      "expect_disposition": "coverage_gap",
+      "why": "部分重叠·确定性层探针（2026-08-19 ③验证）：一药在库一药库外（布洛芬已入识别词典），过闸后必须由 coverage_gap 拦截——缺一半资料的联用问题不起草，明示升级补库。若变成 draft_passed 说明确定性拦截层失效（别名表被动过或覆盖检查被破坏）"
+    },
+    {
+      "id": "ANS-06",
+      "question": "二甲双胍和利伐沙班能一起吃吗",
+      "expect_disposition": "insufficient_evidence",
+      "why": "部分重叠·LLM 层探针：利伐沙班未收录识别词典，coverage_gap 对它天然是盲的——此时最后一道防线是模型拒答（点名缺哪个药）。它若硬答（draft_passed）即 ANS-03 教训重演：形式引用全合法但语义是编的，须回检 prompt 与资格闸"
+    }
+  ]
+}

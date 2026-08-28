@@ -1,0 +1,15 @@
+{
+  "_comment": "资格闸标定探针（2026-08-18，G-05）。用途：测分层负样本的检索分数分布，验证/重锚 generation.draft_min_top1。只测检索不调 LLM。category 含义：full_irrelevant=库外药应被闸拦下；drug_in_topic_out=药在库但主题库外；partial_overlap=一药在库一药库外（最难层，过闸后行为决定是否需要'部分覆盖'终态）；adjacent_topic=主题邻近贴线观察。探针只增不改。",
+  "probes": [
+    {"question": "连花清瘟胶囊可以治疗流感吗", "category": "full_irrelevant", "note": "既有负对照（0.4437），作锚点复测"},
+    {"question": "奥司他韦颗粒儿童用量是多少", "category": "full_irrelevant", "note": "库外药+用法主题，与说明书文体接近"},
+    {"question": "布洛芬缓释胶囊可以空腹吃吗", "category": "full_irrelevant", "note": "库外药+服药方式主题"},
+    {"question": "高血压病人可以喝茶吗", "category": "full_irrelevant", "note": "纯健康咨询，无药品名"},
+    {"question": "阿托伐他汀可以治疗脱发吗", "category": "drug_in_topic_out", "note": "药在库（说明书会高分命中）但脱发主题库中无内容"},
+    {"question": "二甲双胍可以减肥吗", "category": "drug_in_topic_out", "note": "药在库，减肥是超说明书主题（真实高频问询类型）"},
+    {"question": "二甲双胍和布洛芬能一起吃吗", "category": "partial_overlap", "note": "一药在库一药库外：预期二甲双胍块把分数拉高，观察过闸与否"},
+    {"question": "阿托伐他汀和奥司他韦联用需要注意什么", "category": "partial_overlap", "note": "联用句式与库内问询同构，一药库外"},
+    {"question": "他汀类药物都需要忌酒吗", "category": "adjacent_topic", "note": "类别泛化+库内强相关主题，可能贴线"},
+    {"question": "感冒期间能吃辛伐他汀吗", "category": "adjacent_topic", "note": "药在库+感冒场景库中无对应内容"}
+  ]
+}

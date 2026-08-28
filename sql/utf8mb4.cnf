@@ -1,0 +1,8 @@
+# 让容器内 mysql 客户端（含 docker-entrypoint-initdb.d 初始化）默认走 utf8mb4
+# 缺这个配置时 init.sql 里的中文会以 latin1 解码，注释和 DEFAULT 值全部乱码
+[client]
+default-character-set = utf8mb4
+
+[mysqld]
+character-set-server = utf8mb4
+collation-server = utf8mb4_0900_ai_ci

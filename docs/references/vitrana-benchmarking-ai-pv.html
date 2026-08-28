@@ -1,0 +1,1512 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-MDMN6N7NC0"></script> <script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'G-MDMN6N7NC0'); </script>
+    <title>Benchmarking AI Solutions in Pharmacovigilance: KPIs, Validation, and Best Practices</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Vitrana">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description" content="Discover key KPIs, validation protocols, and benchmarking strategies that ensure trustworthy AI deployment in pharmacovigilance." />
+    <meta name="keywords" content="" />
+    <link rel="canonical" href="https://www.vitrana.com/" />
+    <!-- Prevent Clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <!-- Content Type Protection -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <!-- Referrer Policy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <!-- Open Graph Tags -->
+    <meta property="article:publisher" content="https://www.facebook.com/cloudvitrana" />
+    <meta property="article:modified_time" content="2017-02-07T10:47:56+00:00" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Benchmarking AI Solutions in Pharmacovigilance: KPIs, Validation, and Best Practices" />
+     <meta property="og:description" content="Discover key KPIs, validation protocols, and benchmarking strategies that ensure trustworthy AI deployment in pharmacovigilance. " />
+    <meta property="og:url" content="https://vitrana.com/" />
+    <meta property="og:site_name" content="Vitrana" />
+    <meta property="og:image" content=""> 
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:site" content="@CloudVitrana" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content=""> 
+    <!-- favicon icon -->
+    <!-- <link rel="shortcut icon" href="https://www.vitrana.com/images/fav.png">
+    <link rel="apple-touch-icon" href="https://www.vitrana.com/images/fav.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://www.vitrana.com/images/fav.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://www.vitrana.com/images/fav.png"> -->
+	<link rel="apple-touch-icon" sizes="57x57" href="https://www.vitrana.com/images/favicon/favicon_57x.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://www.vitrana.com/images/favicon/favicon_72x.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://www.vitrana.com/images/favicon/favicon_114x.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://www.vitrana.com/images/favicon/favicon_144x.png">
+    <link rel="icon" sizes="16x16" href="https://www.vitrana.com/images/favicon/favicon_16x.png">
+    <link rel="icon" sizes="32x32" href="https://www.vitrana.com/images/favicon/favicon_32x.png">
+    <link rel="icon" sizes="96x96" href="https://www.vitrana.com/images/favicon/favicon_96x.png">
+    <link rel="icon" sizes="128x128" href="https://www.vitrana.com/images/favicon/favicon_128x.png">
+    <link rel="icon" sizes="195x195" href="https://www.vitrana.com/images/favicon/favicon_195x.png">
+    <!-- google fonts preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- style sheets and font icons  -->
+    <link rel="stylesheet" href="https://www.vitrana.com/css/vendors.min.css" />
+    <link rel="stylesheet" href="https://www.vitrana.com/css/icon.min.css" />
+    <link rel="stylesheet" href="https://www.vitrana.com/css/style.css" />
+    <link rel="stylesheet" href="https://www.vitrana.com/css/responsive.min.css" />
+    <link rel="stylesheet" href="https://www.vitrana.com/css/medical.css" />
+    <link rel="stylesheet" href="https://www.vitrana.com/css/data-analysis.css" />
+    </head>
+<body data-mobile-nav-style="classic"> 
+    <div class="box-layout">
+        <!-- start header -->
+        <header>
+            <!-- start navigation -->
+            <nav class="navbar navbar-expand-lg header-light bg-white header-reverse glass-effect">
+                <div class="container-fluid">
+                    <div class="col-auto col-lg-2 me-lg-0 me-auto">
+                        <a class="navbar-brand" href="https://www.vitrana.com/index.php"> <img src="https://www.vitrana.com/images/Vitrana-Parexel-logo-RBG.png" data-at2x="images/Vitrana-Parexel-logo-RBG.png" alt="" class="default-logo"> <img src="https://www.vitrana.com/images/Vitrana-Parexel-logo-RBG.png" data-at2x="images/Vitrana-Parexel-logo-RBG.png" alt="" class="alt-logo"> <img src="https://www.vitrana.com/images/Vitrana-Parexel-logo-RBG.png" data-at2x="images/Vitrana-Parexel-logo-RBG.png" alt="" class="mobile-logo"> </a>
+                    </div>
+                    <div class="col-auto col-lg-8 menu-order position-static">
+                        <button class="navbar-toggler float-start" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation"> <span class="navbar-toggler-line"></span> <span class="navbar-toggler-line"></span> <span class="navbar-toggler-line"></span> <span class="navbar-toggler-line"></span> </button>
+                        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item"><a href="https://www.vitrana.com/products.php" class="nav-link">Products</a></li>
+                                <li class="nav-item"><a href="https://www.vitrana.com/services.php" class="nav-link">Services</a></li>
+                               <!-- <li class="nav-item dropdown simple-dropdown"> <a href="#" class="nav-link">Insights</a> <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                         <li><a href="case-studies.php">Case Studies</a></li>
+                                         <li><a href="blogs/blog-list.php">Blogs</a></li>
+                                          <li><a href="brochure.php">Brochures</a></li> 
+                                        <li><a href="events.php">Events</a></li>
+                                        <li><a href="news.php">Newsroom</a></li> 
+                                        <li><a href="case-studies.php">Case Studies</a></li>
+                                    </ul>
+                                </li> -->
+                                <li class="nav-item dropdown simple-dropdown"> <a href="#" class="nav-link">About Us</a> <i class="fa-solid fa-angle-down dropdown-toggle" id="DropdownMenu2n" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                    <ul class="dropdown-menu" aria-labelledby="DropdownMenu2n">
+                                       <li><a href="https://www.vitrana.com/about-us.php">About Us</a></li>
+                                       <li><a href="https://www.vitrana.com/leadership-team.php">Leadership Team</a></li>
+                                       <li><a href="https://www.vitrana.com/japan-operations.php">Japan Operations</a></li>
+                                        <!-- <li><a href="career.php">Careers</a></li> -->
+                                    </ul>
+                                </li>
+                                <li class="nav-item"><a href="contact-us.php" class="nav-link">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-auto col-lg-2 text-end d-none d-sm-flex">
+                        <div class="header-icon">
+                            <div class="header-button">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#request-demo" class="btn btn-small btn-switch-text btn-base-color left-icon btn-round-edge btn-box-shadow" > <span>
+                                            <span><i class="feather icon-feather-calendar"></i></span> <span class="btn-double-text" data-text="Schedule Demo or Meeting">Schedule Demo or Meeting</span> </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- end navigation -->
+        </header>
+<!-- end header -->
+<!-- start section -->
+<section class="top-space-margin border-radius-6px lg-border-radius-0px py-0" data-parallax-background-ratio="0.5" style="background-image: url(https://www.vitrana.com/images/blogs/default-blog-single-banner.png)" alt="Automating Case Intake">
+    <div class="opacity-light bg-dark-gray"></div>
+    <div class="container-fluid z-index-1 position-relative">
+        <div class="row">
+            <div class="col-xxl-9 col-xl-10 col-lg-11 d-flex flex-column justify-content-center full-screen sm-h-600px">
+                <div class="ps-15 md-ps-10 md-pe-10 sm-px-0" data-anime='{ "el": "childs", "translateX": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'> <span class="alt-font fs-20 text-white mb-3 d-inline-block fw-300">Posted by <a href="https://www.vitrana.com/index.php" class="text-white text-white-hover fw-700 text-decoration-line-bottom">Vitrana</a></span>
+                    <h1 class="alt-font text-white fw-600 mb-5 ls-minus-2px fs-55">Benchmarking AI Solutions in Pharmacovigilance: KPIs, Validation, and Best Practices</h1> <a href="#" class="btn btn-large btn-white btn-hover-animation-switch btn-box-shadow btn-rounded fw-600">Pharma</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end section -->
+<section>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <div class="row position-sticky top-90px lg-top-0px lg-position-relative">
+                    <div class="col-md-12 mb-10 position-sticky top-0">
+                        <div class="author-bio mb-10">
+                            <h5 class="border-bottom pb-3">Table Of Contents</h5>
+                            <ul id="toc" class="ps-0">
+                                <li><a href="#intro">Benchmarking AI Solutions in Pharmacovigilance: KPIs, Validation, and Best Practices</a></li>
+                                <li><a href="#section1">Defining KPIs: Essential Metrics for Pharmacovigilance AI Evaluation</a></li>
+                                <li><a href="#section2">Comparing AI Models: Internal Validation vs Real-World Performance</a></li>
+                                <li><a href="#section3">Best Practices: Operational Excellence in AI Model Management</a></li>
+                                <li><a href="#section4">Conclusion: Measurable Standards as the Foundation for Regulatory Trust</a></li>
+                                <li><a href="#section5">Frequently Asked Questions</a></li>
+                            </ul>
+                        </div>
+                        <div class="author-bio mb-10">
+                            <h5 class="border-bottom pb-3">Tags</h5>
+                            <ul class="blog-tag ps-0">
+                                <li><a herf="#">AI Benchmarking in PV</a></li>
+                                <li><a herf="#">Pharmacovigilance KPIs</a></li>
+                                <li><a herf="#">Validation Best Practices</a></li>
+                                <li><a herf="#">Regulatory AI Performance</a></li>
+                            </ul>
+                        </div>
+                        <div class="author-bio mb-10">
+                            <h5 class="border-bottom pb-3">Category</h5>
+                            <ul class="blog-tag ps-0">
+                                <li><a herf="#">AI Governance in Pharmacovigilance</a></li>
+                                <li><a herf="#">Model Validation & Performance Benchmarking</a></li>
+                            </ul>
+                        </div>
+                        <div class=" text-center elements-social social-icon-style-04">
+                            <ul class="medium-icon dark">
+   <li>
+   <a class="facebook" href="https://www.facebook.com/cloudvitrana" target="_blank">
+   <i class="fa-brands fa-facebook-f"></i><span></span></a>
+   </li>
+   <!-- <li>
+   <a class="twitter" href="https://twitter.com/CloudVitrana" target="_blank">
+   <i class="fa-brands fa-twitter"></i><span></span></a>
+   </li>
+   <li>
+   <a class="instagram" href="https://www.youtube.com/@Vitrana-Inc" target="_blank">
+   <i class="fa-brands fa-youtube"></i><span></span></a>
+   </li> -->
+   <li>
+   <a class="linkedin" href="https://www.linkedin.com/company/vitrana-private-limited/" target="_blank">
+   <i class="fa-brands fa-linkedin-in"></i><span></span></a>
+   </li>
+</ul>                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="blog-content blog-single">
+                    <div id="intro">
+                        <h2> <strong>Benchmarking AI Solutions in Pharmacovigilance: KPIs and Best Practices</strong></h2>
+                        <div class="date-txt clearfix border-bottom-dashed mb-2"> <span><i class="fa-solid fa-calendar text-base-color"></i> &nbsp; published on: &nbsp; 18/02/2026</span> &nbsp; &nbsp; &nbsp; <span><i class="fa fa-user text-base-color"></i> &nbsp; Author: &nbsp; <strong>Vitrana</strong></span> </div>
+                        <div style="float:left; width:40%; padding-right:20px;"> <img src="../images/blogs/benchmarking-ai-solutions-in-pv-kpis-best-practices.png" class="d-inline-block" alt="Benchmarking AI Solutions in Pharmacovigilance"> </div>
+                        <h2><strong>Introduction: The Critical Need for AI Benchmarking in Drug Safety</strong></h2>
+                        <p>The pharmaceutical industry stands at an inflection point in its adoption of artificial intelligence for pharmacovigilance. While AI promises transformative efficiency gains in adverse event processing, signal detection, and literature surveillance, the lack of standardized benchmarking frameworks has created significant validation challenges that slow adoption and undermine regulatory confidence.</p>
+                        <p>The stakes are considerable. Pharmacovigilance systems process safety data that directly influences regulatory decisions, product labels, and clinical practice&mdash;ultimately impacting patient lives. Deploying <a href="https://www.vitrana.com/responsible-ai-in-life-sciences-balancing-innovation-with-compliance/">AI solutions</a> without rigorous performance benchmarks risks introducing systematic errors that could delay critical safety signal detection or generate false alarms that waste investigative resources.</p>
+                        <h3><strong>The Current State of AI Benchmarking in Pharmacovigilance</strong></h3>
+                        <p>Recent industry surveys and assessments reveal substantial gaps in AI validation practices:</p>
+                        <p><strong>Adoption Without Standardization:</strong> A 2024 survey of pharmaceutical safety leaders found that while 72% of organizations have deployed or are piloting AI tools in pharmacovigilance, only 38% have established formal benchmarking frameworks for evaluating these systems. This disparity highlights a concerning pattern of technology adoption outpacing validation rigor.</p>
+                        <p><strong>Performance Metric Inconsistency:</strong> Research examining published AI validation studies in drug safety identified that 64% of implementations report only accuracy metrics, neglecting crucial measures like precision, recall, and F1-scores that provide deeper insight into model behavior. This selective reporting makes cross-system comparisons nearly impossible and obscures important performance trade-offs.</p>
+                        <p><strong>Validation-Production Performance Gaps:</strong> Industry data indicates that AI models for pharmacovigilance tasks experience an average 12-18% performance degradation when transitioning from controlled validation environments to real-world production settings. Organizations without systematic benchmarking often discover these gaps only after deployment, resulting in costly remediation efforts.</p>
+                        <p><strong>Regulatory Scrutiny Intensifying:</strong> Health authorities are increasing their focus on AI validation evidence during inspections. The FDA's 2024 guidance on AI/ML in drug and biological products emphasizes "appropriate performance benchmarks" and "ongoing monitoring," while the EMA's AI reflection paper calls for "transparent performance metrics aligned with intended use." Organizations lacking robust benchmarking documentation face heightened regulatory risk.</p>
+                        <p><strong>Time-to-Signal Measurement Gaps:</strong> Despite time-to-signal being a critical safety metric, only 29% of organizations systematically measure whether AI systems accelerate or delay safety signal identification compared to traditional methods. This gap prevents organizations from quantifying one of AI's most important potential benefits.</p>
+                        <p><strong>Resource Investment Justification:</strong> Without clear performance benchmarks, safety leaders struggle to justify AI investments to executive stakeholders. Organizations with mature benchmarking practices report 3.2x higher success rates in securing funding for AI expansion compared to those relying on anecdotal evidence.</p>
+                        <h3><strong>Why Pharmacovigilance Demands Rigorous Benchmarking</strong></h3>
+                        <p>Drug safety's unique characteristics make benchmarking particularly critical:</p>
+                        <p><strong>Imbalanced Data Prevalence:</strong> Most adverse event datasets exhibit severe class imbalance&mdash;serious adverse events represent only 10-15% of total reports, and true safety signals constitute an even smaller fraction. Standard accuracy metrics can be misleading in these scenarios, making comprehensive benchmarking essential.</p>
+                        <p><strong>High Cost of Errors:</strong> False negatives in signal detection can delay identification of serious patient risks, while false positives waste precious medical reviewer time investigating spurious associations. Benchmarking must quantify both error types to support appropriate model selection.</p>
+                        <p><strong>Regulatory Accountability:</strong> Unlike many AI applications, where suboptimal performance carries limited consequences, pharmacovigilance AI errors can result in regulatory citations, consent decrees, or public health consequences. Benchmarking provides the evidence base for demonstrating due diligence.</p>
+                        <p><strong>Diverse Use Case Requirements:</strong> Different PV applications&mdash;case intake, medical coding, duplicate detection, signal detection&mdash;have distinct performance requirements. Benchmarking frameworks must be flexible enough to accommodate use-case-specific metrics while maintaining cross-application comparability.</p>
+                        <p>This introduction establishes that benchmarking is not merely a technical best practice but a strategic imperative for responsible AI adoption in pharmacovigilance&mdash;one that the industry must address through standardized KPIs, rigorous validation protocols, and transparent performance reporting.</p>
+                    </div>
+                    <div id="section1">
+                        <h2><strong>Defining KPIs: Essential Metrics for Pharmacovigilance AI Evaluation</strong></h2>
+                        <p>Effective benchmarking requires selecting performance indicators that capture the multiple dimensions of AI system quality relevant to drug safety operations. While no single metric tells the complete story, a comprehensive KPI framework enables informed decision-making about model deployment and ongoing performance management.</p> <img src="../images/blogs/defining-kpis-essential-metrics-for-pharmacovigilance-ai-evaluation.jpg" class="img-fluid" alt="Defining KPIs: Essential Metrics for Pharmacovigilance AI Evaluation">
+                        <h3><strong>Core Classification Metrics</strong></h3>
+                        <p><strong>Accuracy:</strong> The proportion of correct predictions (both positive and negative) among total predictions. While intuitively appealing, accuracy can be misleading in imbalanced pharmacovigilance datasets.</p>
+                        <p><em>Formula:</em> Accuracy = (True Positives + True Negatives) / Total Cases</p>
+                        <p><em>PV Context:</em> A model predicting "not serious" for all cases might achieve 85% accuracy in a dataset where only 15% of cases are serious, despite failing to identify any serious adverse events. This demonstrates why accuracy alone is insufficient for PV benchmarking.</p>
+                        <p><em>Typical PV Benchmarks:</em> 88-95% for well-designed systems across balanced validation sets; interpret cautiously in production with imbalanced data.</p>
+                        <p><strong>Precision (Positive Predictive Value):</strong> The proportion of positive predictions that are actually correct. High precision means few false positives&mdash;when the model flags a case as serious or identifies a potential signal, it's usually right.</p>
+                        <p><em>Formula:</em> Precision = True Positives / (True Positives + False Positives)</p>
+                        <p><em>PV Context:</em> For signal detection systems, high precision reduces alert fatigue by ensuring most flagged drug-event combinations warrant investigation. For case triage, high precision means few invalid cases incorrectly classified as reportable ICSRs.</p>
+                        <p><em>Typical PV Benchmarks:</em> 85-92% for case classification; 70-80% for signal detection (where some false positive tolerance is acceptable to avoid missing true signals).</p>
+                        <p><strong>Recall (Sensitivity):</strong> The proportion of actual positive cases that the model correctly identifies. High recall means few false negatives&mdash;the model catches the most important cases.</p>
+                        <p><em>Formula:</em> Recall = True Positives / (True Positives + False Negatives)</p>
+                        <p><em>PV Context:</em> In drug safety, recall is often prioritized over precision because missing a serious adverse event or true safety signal carries greater risk than investigating a false alarm. High recall ensures comprehensive safety surveillance.</p>
+                        <p><em>Typical PV Benchmarks:</em> 90-98% for serious case identification; 85-93% for signal detection, reflecting safety-first priorities that tolerate some false positives to minimize false negatives.</p>
+                        <p><strong>F1-Score:</strong> The harmonic mean of precision and recall, providing a balanced measure that penalizes extreme trade-offs. The F1-score is particularly valuable when you need balanced performance rather than optimizing one metric at the expense of the other.</p>
+                        <p><em>Formula:</em> F1 = 2 &times; (Precision &times; Recall) / (Precision + Recall)</p>
+                        <p><em>PV Context:</em> F1-scores help evaluate whether AI systems achieve an appropriate balance between catching important safety issues (recall) and avoiding alert fatigue (precision). An F1-score of 0.85 with precision=0.82 and recall=0.88 suggests different characteristics than F1=0.85 with precision=0.92 and recall=0.79.</p>
+                        <p><em>Typical PV Benchmarks:</em> 0.85-0.92 for case classification tasks; 0.75-0.85 for signal detection, where the inherent difficulty of distinguishing true signals from noise makes perfect balance challenging.</p>
+                        <h3><strong>Specialized Pharmacovigilance Metrics</strong></h3>
+                        <p><strong>Time-to-Signal:</strong> The duration from when sufficient data exists to identify a safety signal to when the AI system (or human process) actually flags it for investigation. This metric directly measures AI's impact on patient safety.</p>
+                        <p><em>Measurement Approach:</em> Retrospective analysis comparing when known safety signals would have been detected using AI versus traditional disproportionality analysis or periodic review. Requires establishing "ground truth" signal emergence points.</p>
+                        <p><em>PV Context:</em> Accelerating signal detection by even weeks can prevent patient exposures to harmful therapies. Time-to-signal quantifies AI's core value proposition in proactive safety surveillance.</p>
+                        <p><em>Typical PV Benchmarks:</em> 20-40% reduction in time-to-signal compared to traditional methods; signals identified 2-6 weeks earlier on average for AI-augmented surveillance systems.</p>
+                        <p><strong>Case Processing Time:</strong> Average duration to complete case intake, medical coding, and preparation for regulatory submission. While operational rather than purely technical, this KPI measures AI's efficiency impact.</p>
+                        <p><em>Measurement Approach:</em> Track timestamp differences between case receipt and case finalization, segmented by case complexity categories (simple, moderate, complex).</p>
+                        <p><em>Typical PV Benchmarks:</em> 60-75% reduction in processing time for routine cases; 30-50% reduction for complex cases requiring substantial human review, even with AI assistance.</p>
+                        <p><strong>Medical Coding Consistency:</strong> Agreement rate between AI-suggested MedDRA terms and expert coder assignments, measuring whether AI improves coding standardization.</p>
+                        <p><em>Measurement Approach:</em> Calculate inter-coder reliability metrics (Cohen's kappa, Fleiss' kappa) comparing AI suggestions to expert coding, and compare to historical human-to-human intercoder agreement.</p>
+                        <p><em>Typical PV Benchmarks:</em> 0.80-0.90 Cohen's kappa for AI-to-expert agreement; AI should meet or exceed typical human intercoder agreement rates of 0.75-0.85.</p>
+                        <p><strong>Duplicate Detection Accuracy:</strong> The system's ability to correctly identify duplicate case reports while avoiding false linkage of distinct cases.</p>
+                        <p><em>Measurement Components:</em> Requires measuring both sensitivity (identifying true duplicates) and specificity (not incorrectly linking unique cases), as both errors have quality implications.</p>
+                        <p><em>Typical PV Benchmarks:</em> 92-97% sensitivity for duplicate identification; 96-99% specificity to minimize false linkage; F1-scores of 0.90-0.95.</p>
+                        <p><strong>Literature Surveillance Coverage:</strong> The proportion of relevant publications containing reportable adverse events that the AI system successfully identifies and extracts.</p>
+                        <p><em>Measurement Approach:</em> Periodic validation against manually reviewed publication samples, calculating recall (coverage) and precision (relevance).</p>
+                        <p><em>Typical PV Benchmarks:</em> 88-95% recall, ensuring comprehensive literature monitoring; 75-85% precision, balancing thoroughness against manual review burden for false positives.</p>
+                        <h3><strong>Model Robustness and Reliability Metrics</strong></h3>
+                        <p><strong>Prediction Confidence Distribution:</strong> Analysis of how confident the model is in its predictions, revealing whether uncertainty is appropriately calibrated.</p>
+                        <p><em>PV Context:</em> Well-calibrated models with lower confidence on difficult cases can route those cases for enhanced human review, while high-confidence predictions may require less intensive validation.</p>
+                        <p><em>Typical PV Benchmarks:</em> Confidence scores should correlate with actual accuracy&mdash;predictions with 95% confidence should be correct 93-97% of the time (well-calibrated), not 75% (overconfident) or 99% (underconfident).</p>
+                        <p><strong>Performance Across Subgroups:</strong> Measuring whether AI performance varies by case characteristics (product type, report source, geography, event severity) to identify potential biases or gaps.</p>
+                        <p><em>Measurement Approach:</em> Stratify performance metrics by relevant subgroups and flag statistically significant performance variations that might indicate model limitations.</p>
+                        <p><em>Typical PV Benchmarks:</em> Performance variation should remain within &plusmn;5% across major subgroups; larger variations require investigation and potential model refinement.</p>
+                        <p>These KPIs collectively provide a multidimensional view of AI system performance, enabling organizations to make evidence-based decisions about deployment readiness, ongoing monitoring thresholds, and model improvement priorities.</p>
+                        <h3><strong>Using This Benchmarking Table Effectively</strong></h3>
+                        <p><strong>Establishing Baseline Performance:</strong> Before deploying AI, measure current manual process performance using the same metrics. This provides realistic comparison points and helps set achievable targets&mdash;expecting 95% accuracy when current human performance is 88% may be unrealistic.</p>
+                        <p><strong>Risk-Based Benchmark Adjustment:</strong> Organizations may adjust benchmarks based on risk tolerance and resource constraints. A company with substantial safety staff might accept lower precision (more false positives) to maximize recall, while resource-constrained organizations might need tighter precision to make the investigation workload manageable.</p>
+                        <p><strong>Vendor Evaluation Framework:</strong> When evaluating commercial AI solutions, request validation evidence demonstrating performance against these benchmarks on representative datasets. Be skeptical of vendors showing only accuracy or only results on curated datasets.</p>
+                        <p><strong>Continuous Monitoring Thresholds:</strong> Use these benchmarks to establish alert thresholds for production monitoring. If any metric falls below the lower bound of its benchmark range, trigger investigation and potential model retraining.</p>
+                        <p><strong>Progressive Improvement Roadmap:</strong> Organizations new to AI might initially accept performance at the lower end of benchmark ranges, establishing improvement roadmaps to reach optimal levels over 12-24 months as systems mature and training data expands.</p>
+                        <p>This reference framework enables consistent, evidence-based AI evaluation across the pharmacovigilance ecosystem, fostering transparency and accelerating industry maturation in AI adoption.</p>
+                    </div>
+                    <div id="section2">
+                        <h2><strong>Comparing AI Models: Internal Validation vs Real-World Performance</strong></h2>
+                        <p>One of the most critical&mdash;and frequently overlooked&mdash;aspects of AI benchmarking is understanding the performance gap between controlled validation environments and production deployment. This gap often determines whether AI implementations succeed or become expensive failures requiring extensive remediation.</p>
+                        <h3><strong>The Validation-Production Performance Gap</strong></h3>
+                        <p><strong>Why Gaps Emerge:</strong> AI models are typically developed and validated using historical datasets with known outcomes, carefully curated for quality and completeness. Production environments present challenges absent in validation:</p> <img src="../images/blogs/the-validation-production-performance-gap.jpg" class="img-fluid" alt="The Validation-Production Performance Gap">
+                        <ul>
+                            <li><strong>Data Quality Variations:</strong> Real-world case reports arrive with inconsistent completeness, varying narrative quality, and diverse formats that may not match training data distributions.</li>
+                            <li><strong>Temporal Drift:</strong> Medical terminology evolves, new products enter the market, reporting patterns change, and healthcare practices shift&mdash;all creating subtle drift from the model's training distribution.</li>
+                            <li><strong>Edge Case Frequency:</strong> Validation sets often oversample interesting cases to ensure adequate representation. Production presents a higher proportion of routine, straightforward cases, but also more true edge cases not anticipated during development.</li>
+                            <li><strong>Workflow Integration Effects:</strong> In validation, cases are often pre-processed to match model input requirements. In production, data quality issues, system integration challenges, and workflow constraints can degrade input quality.</li>
+                        </ul>
+                        <p><strong>Quantifying the Gap:</strong> Industry data suggests average performance degradation of 12-18% when transitioning from validation to production. However, this varies substantially by application:</p>
+                        <ul>
+                            <li>Case classification typically sees 8-12% degradation</li>
+                            <li>Medical coding experiences a 10-15% degradation</li>
+                            <li>Signal detection shows 15-20% degradation due to evolving safety landscapes</li>
+                            <li>Literature surveillance exhibits 12-18% degradation as publication patterns change</li>
+                        </ul>
+                        <h3><strong>Internal Validation Best Practices</strong></h3>
+                        <p><strong>Temporal Validation Splits:</strong> Rather than random train-test splits, use temporal splits where training data predates test data. This better simulates production conditions where models predict future cases based on historical learning.</p>
+                        <p><em>Implementation:</em> Train on years 2020-2023, validate on 2024 data. If performance degrades substantially, the model may not handle temporal drift well.</p>
+                        <p><strong>Stratified Sampling:</strong> Ensure validation sets maintain realistic class distributions matching production data. Oversampling rare events for model training is appropriate, but validation should reflect true production frequencies.</p>
+                        <p><em>Implementation:</em> If 12% of production cases are serious adverse events, validation sets should maintain that proportion rather than artificial 50/50 serious/non-serious splits.</p>
+                        <p><strong>Out-of-Distribution Testing:</strong> Deliberately test model performance on case types, products, or data sources absent from training data to assess generalization capability.</p>
+                        <p><em>Implementation:</em> If the model was trained on small molecule drugs, test performance on biologics or gene therapies before deploying across the entire product portfolio.</p>
+                        <p><strong>Adversarial Validation:</strong> Create challenging test cases specifically designed to probe model weaknesses&mdash;ambiguous case descriptions, borderline seriousness determinations, unusual adverse event terminology.</p>
+                        <p><em>Implementation:</em> Safety experts craft difficult validation cases based on historical disagreements or classification challenges, testing whether AI handles nuanced scenarios appropriately.</p>
+                        <h3><strong>Production Performance Monitoring</strong></h3>
+                        <p><strong>Continuous Metric Tracking:</strong> Production systems should automatically calculate performance metrics on a rolling basis, using human-validated cases as ground truth.</p>
+                        <p><em>Implementation:</em> Calculate weekly precision, recall, and F1-scores on all cases that underwent human review or QA, tracking trends over time to detect performance degradation.</p>
+                        <p><strong>Drift Detection Algorithms:</strong> Implement statistical methods to identify when input data distributions or model outputs shift significantly from training expectations.</p>
+                        <p><em>Techniques:</em> Kolmogorov-Smirnov tests for feature distribution shifts, Page-Hinkley tests for gradual drift, or specialized drift detection algorithms like ADWIN that adapt to streaming data.</p>
+                        <p><strong>Human-AI Agreement Analysis:</strong> Track concordance between AI predictions and human decisions, investigating patterns in disagreement to identify systematic issues.</p>
+                        <p><em>Implementation:</em> When humans override AI suggestions &gt;15% of the time on a particular case type or for a specific product, investigate whether model retraining or refinement is needed.</p>
+                        <p><strong>A/B Testing for Model Updates:</strong> Before fully deploying model improvements, run controlled experiments comparing new model versions against existing systems on live production data.</p>
+                        <p><em>Implementation:</em> Route 80% of cases to the production model and 20% to the candidate model, comparing performance metrics over 2-4 weeks before full rollout.</p>
+                        <h3><strong>Bridging the Validation-Production Gap</strong></h3>
+                        <p><strong>Shadow Mode Deployment:</strong> Run new AI systems in parallel with existing processes, generating predictions without affecting operations. This provides real-world performance data before actual deployment.</p>
+                        <p><em>Benefits:</em> Reveals production challenges without risking quality, builds confidence among safety professionals, and allows tuning before go-live.</p>
+                        <p><strong>Gradual Rollout Strategies:</strong> Deploy AI to subsets of workflows, products, or case types before full implementation, enabling controlled expansion based on demonstrated performance.</p>
+                        <p><em>Implementation Example:</em> Begin with case classification for well-established small molecules, expand to new products after 3-6 months of stable performance, then extend to biologics after additional validation.</p>
+                        <p><strong>Production Fine-Tuning:</strong> Use accumulated production data and human feedback to retrain models periodically, adapting to real-world conditions.</p>
+                        <p><em>Frequency:</em> Quarterly retraining for rapidly evolving applications like signal detection; semi-annual for more stable applications like medical coding.</p>
+                        <p><strong>Ensemble Approaches:</strong> Deploy multiple models with different strengths, combining predictions to improve robustness. If individual models disagree substantially, flag cases for enhanced human review.</p>
+                        <p><em>Implementation:</em> Combine a model optimized for high recall with one optimized for high precision, using human review when they disagree about case classification.</p>
+                        <h3><strong>Setting Realistic Performance Expectations</strong></h3>
+                        <p>Organizations should plan for the validation-production gap when establishing deployment criteria:</p>
+                        <ul>
+                            <li>If validation performance is 92% accuracy, expect 80-85% in production initially</li>
+                            <li>Budget for 3-6 months of production tuning to reach optimal performance</li>
+                            <li>Accept that some degradation is inevitable and focus on continuous improvement</li>
+                            <li>Maintain manual fallback processes during initial deployment phases</li>
+                        </ul>
+                        <p>The key insight is that internal validation provides necessary but insufficient evidence of AI readiness. True benchmarking requires production performance measurement with continuous monitoring to ensure ongoing model effectiveness in real-world pharmacovigilance operations.</p>
+                    </div>
+                    <div id="section3">
+                        <h2><strong>Best Practices: Operational Excellence in AI Model Management</strong></h2>
+                        <p>Robust benchmarking extends beyond initial validation to encompass the entire AI lifecycle&mdash;continuous monitoring, systematic retraining, and comprehensive auditing that ensures sustained performance and regulatory compliance.</p>
+                        <h3><strong>Continuous Performance Monitoring Framework</strong></h3>
+                        <p><strong>Automated Metric Dashboards:</strong> Implement real-time monitoring systems that track key performance indicators continuously, providing safety leadership with visibility into AI system health.</p>
+                        <p><em>Essential Components:</em></p>
+                        <ul>
+                            <li>Daily/weekly KPI trends (accuracy, precision, recall, F1-scores) with statistical confidence intervals</li>
+                            <li>Alerting mechanisms are triggered when metrics fall below predefined thresholds.</li>
+                            <li>Segmented views showing performance across case types, products, and data sources</li>
+                            <li>Comparison views showing current performance against historical baselines and benchmark targets</li>
+                        </ul>
+                        <p><em>Implementation Considerations:</em> Dashboards should be accessible to both technical AI teams and pharmacovigilance leadership, with appropriate visualizations for each audience&mdash;technical teams may need detailed confusion matrices while safety leaders need high-level trend indicators.</p>
+                        <p><strong>Human-in-the-Loop Feedback Collection:</strong> Systematically capture human validation decisions, overrides, and corrections as signals of model performance and learning opportunities.</p>
+                        <p><em>Data Collection Strategy:</em></p>
+                        <ul>
+                            <li>Log every AI prediction alongside the final human decision</li>
+                            <li>Require a brief rationale when humans override AI suggestions (free text or predefined categories)</li>
+                            <li>Flag cases where humans expressed low confidence in AI recommendations</li>
+                            <li>Track validation time as a proxy for prediction quality&mdash;difficult cases require more review time</li>
+                        </ul>
+                        <p><em>Privacy and Ethics Considerations:</em> Frame feedback collection as quality improvement rather than individual performance monitoring to maintain trust and encourage honest feedback.</p>
+                        <p><strong>Drift Detection and Root Cause Analysis:</strong> Implement statistical process control methods to identify when model performance degrades, then systematically investigate causes.</p>
+                        <p><em>Drift Detection Techniques:</em></p>
+                        <ul>
+                            <li>Control charts showing performance metrics with statistically derived control limits</li>
+                            <li>Distribution monitoring, comparing current input feature distributions to training data baselines</li>
+                            <li>Concept drift detection algorithms identify when relationships between inputs and outputs change</li>
+                        </ul>
+                        <p><em>Root Cause Investigation Protocol:</em> When drift is detected: (1) analyze recent cases for data quality issues, (2) review recent product additions or formulation changes, (3) check for regulatory or terminology updates, (4) examine whether new report sources exhibit different characteristics, (5) assess whether seasonal patterns affect reporting.</p>
+                        <h3><strong>Systematic Model Retraining Protocols</strong></h3>
+                        <p><strong>Scheduled Retraining Cadence:</strong> Establish regular retraining schedules appropriate to each application's rate of change, rather than ad hoc retraining triggered by crises.</p>
+                        <p><em>Recommended Frequencies:</em></p>
+                        <ul>
+                            <li>Signal detection AI: Quarterly retraining to adapt to evolving safety landscape</li>
+                            <li>Medical coding AI: Semi-annual retraining aligned with MedDRA version releases</li>
+                            <li>Case classification AI: Semi-annual to annual retraining unless significant drift is detected</li>
+                            <li>Literature surveillance AI: Quarterly retraining to adapt to publication pattern changes</li>
+                        </ul>
+                        <p><em>Retraining Triggers:</em> In addition to scheduled retraining, trigger immediate retraining when: (1) performance metrics degrade &gt;10% below baselines, (2) major changes affect the safety database (new product launches, acquisition of another company's products), (3) regulatory terminology updates (new MedDRA version), (4) drift detection algorithms flag significant distribution shifts.</p>
+                        <p><strong>Training Data Management:</strong> Maintain curated, high-quality training datasets that evolve with production experience while preserving data governance and privacy.</p>
+                        <p><em>Training Data Strategy:</em></p>
+                        <ul>
+                            <li>Continuously augment training sets with production cases validated by experts</li>
+                            <li>Prioritize adding cases where initial AI predictions were incorrect (learning from mistakes)</li>
+                            <li>Maintain balanced representation across case types, products, and complexity levels</li>
+                            <li>Document data provenance, validation dates, and validator qualifications for regulatory traceability</li>
+                        </ul>
+                        <p><em>Data Quality Standards:</em> Establish acceptance criteria for training data&mdash;complete required fields, validated outcomes, appropriate de-identification, expert review completion, and exclude poor-quality cases that could degrade model learning.</p>
+                        <p><strong>Version Control and Rollback Capabilities:</strong> Maintain comprehensive versioning of models, training data, and configuration parameters to support audits and enable rapid rollback if issues arise.</p>
+                        <p><em>Version Control Essentials:</em></p>
+                        <ul>
+                            <li>Unique version identifiers for every model deployed to production</li>
+                            <li>Comprehensive change logs documenting what changed between versions</li>
+                            <li>Frozen copies of training data and validation results for each version</li>
+                            <li>Configuration snapshots capturing all hyperparameters and preprocessing steps</li>
+                        </ul>
+                        <p><em>Rollback Protocols:</em> Define clear criteria for reverting to previous model versions (e.g., &gt;15% performance degradation, unacceptable increase in serious AE false negatives) and test rollback procedures during non-critical periods.</p>
+                        <p><strong>A/B Testing and Champion-Challenger Deployment:</strong> Before fully deploying retrained models, validate improvements through controlled production experiments.</p>
+                        <p><em>Implementation Approach:</em></p>
+                        <ul>
+                            <li>Deploy candidate "challenger" model alongside the current "champion" model in production.</li>
+                            <li>Route statistically similar case samples to each model (e.g., 70% champion, 30% challenger)</li>
+                            <li>Compare performance metrics over 2-4 weeks before deciding whether the challenger becomes the new champion.</li>
+                            <li>Document decision rationale and evidence for regulatory inspection preparedness</li>
+                        </ul>
+                        <h3><strong>Comprehensive Auditing and Documentation</strong></h3>
+                        <p><strong>Performance Validation Documentation:</strong> Maintain detailed records demonstrating that AI systems meet regulatory expectations for validation and ongoing monitoring.</p>
+                        <p><em>Essential Documentation Elements:</em></p>
+                        <ul>
+                            <li>Validation protocols defining test procedures, acceptance criteria, and statistical methods</li>
+                            <li>Validation reports showing actual performance against predefined benchmarks</li>
+                            <li>Test case databases with clear traceability between inputs, predictions, and ground truth</li>
+                            <li>Statistical analysis supporting performance claims (confidence intervals, significance testing)</li>
+                            <li>Comparison to traditional methods demonstrating non-inferiority or superiority</li>
+                        </ul>
+                        <p><strong>Audit Trail Requirements:</strong> Ensure complete traceability for every AI-influenced decision, supporting regulatory inspection and quality investigations.</p>
+                        <p><em>Audit Trail Components:</em></p>
+                        <ul>
+                            <li>Model version used for each prediction</li>
+                            <li>Input data provided to model (with appropriate de-identification for archives)</li>
+                            <li>Model output including prediction and confidence score</li>
+                            <li>Human validation decision and validator identity</li>
+                            <li>Timestamp of all actions</li>
+                            <li>Rationale for any human override of AI suggestion</li>
+                        </ul>
+                        <p><em>Retention Policies:</em> Align audit trail retention with regulatory requirements for pharmacovigilance records&mdash;typically 25+ years for case safety reports, requiring scalable, secure archival systems.</p>
+                        <p><strong>Third-Party Model Validation:</strong> For high-risk applications or regulatory preparedness, engage independent validation services to provide an objective performance assessment.</p>
+                        <p><em>Benefits:</em> Third-party validation provides credible evidence for regulatory submissions, identifies blind spots internal teams may miss, and demonstrates organizational commitment to rigorous AI governance.</p>
+                        <p><em>Validation Scope:</em> Independent reviewers should assess model performance on held-out test sets, review training data quality and representativeness, evaluate documentation completeness, and test model behavior on edge cases.</p>
+                        <p><strong>Regulatory Inspection Readiness:</strong> Prepare comprehensive AI system documentation packages that anticipate regulatory authority questions.</p>
+                        <p><em>Inspection Package Contents:</em></p>
+                        <ul>
+                            <li>System description: intended use, risk classification, validation approach</li>
+                            <li>Performance evidence: validation results, production monitoring data, comparative analysis</li>
+                            <li>Quality management: change control procedures, deviation handling, continuous improvement processes</li>
+                            <li>Training and competency: documentation showing personnel understand AI capabilities and limitations</li>
+                            <li>Risk assessment: FMEA or similar analysis identifying potential failure modes and mitigations</li>
+                        </ul> <img src="../images/blogs/organizational-best-practices.jpg" class="img-fluid" alt="Comprehensive Auditing and Documentation">
+                        <h3><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></h3>
+                        <p><strong>Cross-Functional Governance:</strong> Establish AI oversight committees, including pharmacovigilance, IT, quality assurance, regulatory affairs, and data science, to ensure balanced decision-making.</p>
+                        <p><em>Governance Responsibilities:</em> Approve new AI deployments, review performance monitoring reports, authorize model retraining, investigate significant deviations, and maintain the AI risk registry.</p>
+                        <p><strong>Competency Development:</strong> Invest in training programs ensuring pharmacovigilance professionals understand AI capabilities, limitations, and appropriate trust calibration.</p>
+                        <p><em>Training Components:</em> AI fundamentals for safety professionals, interpretation of performance metrics, recognition of potential AI errors, procedures for escalating concerns, and hands-on experience with AI-augmented workflows.</p>
+                        <p><strong>Vendor Management for Commercial AI:</strong> If using third-party AI solutions, establish rigorous vendor oversight, ensuring transparency and accountability.</p>
+                        <p><em>Vendor Requirements:</em> Access to performance validation data, notification of model updates, audit rights for inspection preparedness, escrow arrangements for source code access if the vendor discontinues products, and contractual liability provisions for AI-related quality issues.</p>
+                        <p>These best practices transform AI benchmarking from a one-time validation exercise into an ongoing organizational capability that sustains performance, manages risk, and builds regulatory confidence over the entire AI lifecycle.</p>
+                    </div>
+                    <div id="section4">
+                        <h2><strong>Conclusion: Measurable Standards as the Foundation for Regulatory Trust</strong></h2>
+                        <p>The pharmaceutical industry's journey toward widespread AI adoption in pharmacovigilance ultimately depends on establishing measurable standards that demonstrate performance, ensure accountability, and build regulatory confidence. Without robust benchmarking frameworks, AI risks remaining a promising technology deployed inconsistently, validated inadequately, and viewed skeptically by the health authorities responsible for protecting public health.</p>
+                        <p>The quantitative evidence presented throughout this analysis makes clear that benchmarking delivers concrete value beyond regulatory compliance. Organizations with mature KPI frameworks achieve 3.2x higher AI investment approval rates, identify performance degradation 4-6 weeks earlier than those relying on reactive quality reviews, and demonstrate 85% faster resolution of regulatory inspection findings related to AI systems.</p>
+                        <p><strong>Key Takeaways for Pharmacovigilance Leaders:</strong></p>
+                        <p><strong>Comprehensive Metric Selection:</strong> Moving beyond simplistic accuracy metrics to embrace precision, recall, F1-scores, time-to-signal, and robustness measures provides the multidimensional view necessary for high-stakes safety applications. Each metric illuminates different aspects of AI performance, and collectively they enable informed deployment decisions that balance efficiency gains against quality requirements.</p>
+                        <p><strong>Validation-Production Gap Planning:</strong> The 12-18% average performance degradation from validation to production is not a failure of AI technology but an inevitable consequence of real-world complexity. Organizations that plan for this gap&mdash;through shadow deployments, gradual rollouts, and production fine-tuning budgets&mdash;achieve successful implementations while those expecting seamless transitions face costly surprises.</p>
+                        <p><strong>Continuous Monitoring as Core Capability:</strong> Benchmarking is not a one-time validation gate but an ongoing operational discipline. Real-time performance dashboards, drift detection algorithms, and systematic feedback collection transform AI from a static deployment into a continuously improving asset that adapts to evolving pharmacovigilance challenges.</p>
+                        <p><strong>Regulatory Alignment as Strategic Advantage:</strong> As health authorities worldwide develop AI oversight frameworks, organizations with transparent benchmarking documentation, comprehensive audit trails, and evidence-based validation will find regulatory interactions smoother and market access faster. Investment in rigorous benchmarking now pays dividends in regulatory efficiency later.</p>
+                        <p><strong>Industry Standardization Imperative:</strong> The current fragmentation in AI benchmarking practices&mdash;with only 38% of organizations employing formal frameworks&mdash;undermines collective progress. Industry initiatives to standardize PV AI benchmarks would accelerate adoption, enable vendor comparisons, and strengthen regulatory partnerships.</p>
+                        <p>Looking ahead, pharmacovigilance AI will mature from early adoption experimentation to standardized, validated infrastructure supporting global drug safety surveillance. This maturation requires the industry to embrace benchmarking not as bureaucratic overhead but as the essential foundation for trustworthy AI&mdash;a foundation built on measurable performance, continuous improvement, and unwavering commitment to patient safety.</p>
+                        <p>Organizations embarking on AI adoption should prioritize establishing benchmarking capabilities before deploying systems, invest in monitoring infrastructure alongside model development, and foster cultures where quantitative evidence guides AI decisions rather than optimism or vendor claims. This evidence-based approach transforms AI from a technological risk into a strategic asset that enhances pharmacovigilance effectiveness while maintaining the regulatory trust that underpins global drug safety systems.</p>
+                    </div>
+                    <div id="section5">
+                        <h2><strong>Frequently Asked Questions</strong></h2>
+                        <p><strong>Q: What is the minimum acceptable accuracy for deploying AI in pharmacovigilance workflows?</strong></p>
+                        <p>A: There is no universal minimum accuracy threshold&mdash;requirements depend on the specific application, risk tolerance, and current baseline performance. For case classification, industry benchmarks suggest 90-95% accuracy, but organizations should compare this to existing manual process performance. If current human accuracy is 88%, expecting AI to achieve 95% immediately may be unrealistic. The critical principle is that AI should demonstrate non-inferiority to existing processes, with clear risk mitigation for any performance gaps. Additionally, accuracy alone is insufficient&mdash;recall (sensitivity) is often more important in safety-critical applications to ensure adverse events aren't missed.</p>
+                        <p><strong>Q: How often should AI models be retrained in pharmacovigilance applications?</strong></p>
+                        <p>A: Retraining frequency depends on the application's rate of change. Signal detection AI should be retrained quarterly as the safety landscape evolves with new products and emerging safety data. Medical coding AI benefits from semi-annual retraining aligned with MedDRA version releases. Case classification AI typically requires semi-annual to annual retraining unless significant performance drift is detected. Beyond scheduled retraining, implement continuous monitoring to trigger immediate retraining if performance degrades &gt;10% below baseline, major database changes occur, or terminology updates are released.</p>
+                        <p><strong>Q: What KPIs are most important for regulatory inspections of AI systems?</strong></p>
+                        <p>A: Regulatory authorities prioritize several key metrics: <br>
+                            (1) Recall/sensitivity demonstrating the system doesn't miss critical safety events, <br>
+                            (2) audit trail completeness showing every AI-influenced decision is traceable, <br>
+                            (3) validation documentation proving systematic testing against predefined acceptance criteria,<br> (4) ongoing monitoring evidence showing continuous performance assessment, <br>
+                            (5) validation-production performance comparisons demonstrating real-world effectiveness, and <br>(6) human oversight documentation showing qualified professionals validate AI outputs. Regulatory inspectors also examine how organizations handle AI errors, model updates, and quality deviations.</p>
+                        <p><strong>Q: How can organizations benchmark AI performance when ground truth is ambiguous?</strong></p>
+                        <p>A: Pharmacovigilance often involves subjective judgments where even experts disagree&mdash;for example, causality assessment or borderline seriousness determinations. In these scenarios: <br>
+                            (1) establish expert consensus panels to create validated ground truth datasets, <br>
+                            (2) measure inter-rater reliability (Cohen's kappa) and require AI performance to meet or exceed human agreement rates, <br>
+                            (3) use confidence scores to identify cases where AI is uncertain and route them for enhanced review, <br>
+                            (4) track human override rates as a proxy for AI-human disagreement, and <br>
+                            (5) focus benchmarking on clear-cut cases initially, gradually expanding to more ambiguous scenarios as models mature.</p>
+                        <p><strong>Q: What is the typical validation-production performance gap for PV AI systems?</strong></p>
+                        <p>A: Industry data shows an average 12-18% performance degradation when AI models transition from controlled validation environments to production deployment. This gap varies by application: case classification typically experiences 8-12% degradation, medical coding 10-15%, signal detection 15-20% due to evolving safety landscapes, and literature surveillance 12-18% as publication patterns change. Organizations should plan for this gap by: setting deployment thresholds above minimum acceptable production performance, implementing shadow mode testing before full deployment, budgeting for 3-6 months of production tuning, and maintaining continuous monitoring to detect degradation early.</p>
+                        <p><strong>Q: Should organizations develop custom AI models or purchase commercial solutions?</strong></p>
+                        <p>A: This decision depends on several factors evaluated through benchmarking: <br>
+                            (1) Compare commercial solution performance on your actual data against benchmarks&mdash;vendors should provide validation evidence on representative datasets, <br>
+                            (2) assess whether commercial solutions offer sufficient transparency for regulatory inspection preparedness, <br>
+                            (3) evaluate total cost of ownership including licensing, integration, validation, and ongoing monitoring for commercial solutions versus development and maintenance costs for custom models, <br>(4) consider strategic value of internal AI capability development versus speed-to-deployment, and <br>
+                            (5) examine vendor stability and long-term support commitments. Many organizations adopt hybrid approaches&mdash;commercial solutions for well-standardized tasks with custom models for organization-specific workflows.</p>
+                        <p><strong>Q: How can organizations demonstrate AI non-inferiority to regulatory authorities?</strong></p>
+                        <p>A: Demonstrating non-inferiority requires systematic comparative studies: <br>
+                            (1) establish baseline performance of current manual processes using the same metrics that will evaluate AI (accuracy, recall, precision, time-to-signal), <br>
+                            (2) conduct parallel processing where both manual and AI methods process identical case sets, comparing outcomes, <br>
+                            (3) perform retrospective validation showing AI would have detected known historical signals at least as quickly as traditional methods, <br>
+                            (4) document statistical analyses with appropriate confidence intervals and significance testing, <br>
+                            (5) implement ongoing monitoring comparing AI performance to concurrent manual processing samples, and <br>
+                            (6) maintain comprehensive audit trails enabling reconstruction of AI decision-making during inspections. Non-inferiority should be demonstrated not just on average performance but across critical subgroups and edge cases.</p>
+                        <p><strong>Q: What are the most common benchmarking mistakes organizations make?</strong></p>
+                        <p>A: Frequent pitfalls include: <br>
+                            (1) relying solely on accuracy metrics without examining precision, recall, and F1-scores, which obscures important performance trade-offs, <br>
+                            (2) validating on artificially balanced datasets that don't reflect production class distributions, <br>
+                            (3) using random train-test splits rather than temporal splits, failing to test the model's ability to handle future cases, <br>
+                            (4) neglecting to measure performance across subgroups (products, case types, severity levels), missing potential biases, <br>
+                            (5) comparing AI to idealized human performance rather than actual operational baselines, <br>
+                            (6) insufficient production monitoring infrastructure, discovering performance degradation too late, <br>
+                            (7) inadequate documentation of validation protocols and results for regulatory inspection, and <br>(8) focusing exclusively on technical metrics while ignoring operational KPIs like time-to-signal or processing efficiency that demonstrate business value.</p>
+                        <p><strong>Q: How should organizations set performance thresholds for alerting and model retraining?</strong></p>
+                        <p>A: Threshold-setting should be risk-based and data-driven: <br>
+                            (1) establish baseline performance during initial validation&mdash;for example, if validation accuracy is 93%, set a warning threshold at 88% (5% degradation) and critical threshold at 83% (10% degradation), <br>
+                            (2) prioritize metrics aligned with patient safety&mdash;tighter thresholds for recall/sensitivity than for precision, <br>
+                            (3) use statistical process control methods to identify when variation exceeds normal fluctuation, <br>
+                            (4) implement tiered response protocols: warning thresholds trigger investigation, critical thresholds mandate immediate action or model suspension, <br>
+                            (5) adjust thresholds based on accumulated experience&mdash;if 8% degradation consistently requires retraining, tighten thresholds proactively, and <br>
+                            (6) document threshold rationale and change management procedures for regulatory transparency. Review and update thresholds annually as organizational AI maturity increases.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end section -->
+<!-- start footer -->
+</div>
+<!-- start footer -->
+<footer class="p-0 position-relative bg-dark-gray">
+    <div class="container position-relative">
+        <div class="row justify-content-center pt-5 sm-pt-40px">
+            <!-- start footer column -->
+            <div class="col-6 col-xl-4 col-lg-12 col-sm-6 last-paragraph-no-margin text-xl-start text-lg-center order-sm-1 lg-mb-50px sm-mb-30px">
+                <a href="index.php" class="footer-logo mb-15px d-inline-block"> <img src="https://www.vitrana.com/images/Vitrana-Parexel-logo-WHITE.png" data-at2x="https://www.vitrana.com/images/Vitrana-Parexel-logo-WHITE.png" alt=""> </a>
+                <p class="lh-28 w-90 xl-w-100 mx-lg-auto mx-xl-0 text-white-50">Vitrana is a pioneering technology company specializing in pharmacovigilance solutions for the pharmaceutical and life sciences industry.
+                    <br> <a href="https://www.vitrana.com/about-us.php" class=" text-base-color text-decoration-underline">Read More..</a> </p>
+            </div>
+            <!-- end footer column -->
+            <!-- start footer column -->
+            <div class="col-6 col-xl-2 col-lg-2 col-sm-4 xs-mb-30px order-sm-3 order-lg-2"> <span class="fw-600 d-block text-white mb-5px">Quick Links</span>
+                <ul>
+                    <li><a href="https://www.vitrana.com/index.php" class="text-white-50">Home</a></li>
+                    <li><a href="https://www.vitrana.com/about-us.php" class="text-white-50">About Us</a></li>
+                    <!-- <li><a href="career.php" class="text-white-50">Careers</a></li> -->
+                    <!-- <li><a href="blogs/blog-list.php" class="text-white-50">Blogs</a></li> -->
+                </ul>
+            </div>
+            <!-- end footer column -->
+            <!-- start footer column -->
+            <div class="col-6 col-xl-3 col-lg-3 col-md-5 col-sm-4 xs-mb-30px order-sm-4 order-lg-3"> <span class="fw-600 d-block text-white mb-5px">LET'S CONNECT</span>
+                <ul>
+                    <!--<li><a href="#" data-bs-toggle="modal" data-bs-target="#request-meeting" class="text-white-50">Request a meeting</a></li>-->
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#request-demo" class="text-white-50">Schedule Demo or Meeting</a></li>
+                    <li class="nav-item"><a href="https://www.vitrana.com/contact-us.php" class="text-white-50">Contact Us</a></li>
+                </ul>
+            </div>
+            <!-- end footer column -->
+            <!-- start footer column -->
+            <div class="col-6 col-xl-3 col-lg-3 col-md-3 col-sm-4 xs-mb-30px order-sm-5 order-lg-4">
+                <span class="fw-600 d-block text-white mb-5px">Need support?</span>
+                 <!--<span>Call us directly?</span> <span class="d-block mb-10px"><a class="text-white-50 fw-600" href="tel:+919810275410">+91 98102 75410</a></span>-->
+                 
+                  
+                <a href="mailto:sales@vitrana.com" class="text-white-50 fw-600">sales@vitrana.com</a>
+                <div class="elements-social social-icon-style-02 mt-15px">
+                    <ul class="medium-icon dark">
+                        <li class="my-0"><a class="facebook" href="https://www.facebook.com/cloudvitrana" target="_blank"><i class="text-white fa-brands fa-facebook-f"></i></a></li>
+                        <li class="my-0"><a class="linkedin" href="https://www.linkedin.com/company/vitrana-private-limited/" target="_blank"><i class="text-white fa-brands fa-linkedin"></i></a></li>
+                        <!-- <li class="my-0"><a class="twitter" href="https://twitter.com/CloudVitrana" target="_blank"><i class="text-white fa-brands fa-square-x-twitter"></i></a></li>
+                        <li class="my-0"><a class="youtube" href="https://www.youtube.com/@Vitrana-Inc" target="_blank"><i class="text-white fa-brands fa-youtube"></i></a></li> -->
+                    </ul>
+                </div>
+            </div>
+            <!-- end footer column -->
+        </div>
+        <div class="container border-top mt-3">
+            <div class="row row-cols-1 row-cols-md-2 align-items-center pt-30px pb-30px">
+                <!-- start copyright -->
+                <div class="col last-paragraph-no-margin fs-15 text-center text-md-start sm-mb-10px">
+                    <p class="text-white-50">&copy; COPYRIGHT 2026 VITRANA. ALL RIGHTS RESERVED</p>
+                </div>
+                <!-- end copyright -->
+                <!-- start footer menu -->
+                <div class="col text-end fs-15 text-center text-md-end">
+                    <ul class="footer-navbar lh-normal">
+                       <li class="me-35px sm-me-20px"><a href="https://www.vitrana.com/privacy-policy.php" class="text-white-50">Privacy policy</a></li>
+                        <li class="me-35px sm-me-20px"><a href="https://www.vitrana.com/cookie-policy.php" class="text-white-50">Cookie Policy</a></li>
+                        
+                        <li><a href="https://www.vitrana.com/safe-harbor-provision.php" class="text-white-50"> Safe Harbor Provision</a></li>
+                    </ul>
+                </div>
+                <!-- end footer menu -->
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+<div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-text">
+        Vitrana uses cookies to analyse our traffic and to personalise the content.
+        We also disclose information about your use of our site with our analytics partners.
+        Additional details are available in our
+        <a href="cookie-policy.php">cookie policy</a>.
+    </div>
+    <button class="cookie-btn" id="acceptCookies">Accept Cookies</button>
+</div>
+<!-- start scroll progress -->
+<div class="scroll-progress d-none d-xxl-block">
+    <a href="#" class="scroll-top" aria-label="scroll"> <span class="scroll-text">Scroll</span><span class="scroll-line"><span class="scroll-point"></span></span>
+    </a>
+</div>
+<!-- end scroll progress -->
+<!-- start sticky column -->
+<!--<div class="sticky-wrap d-none d-xl-inline-block" data-animation-delay="100" data-shadow-animation="true"> <span class="fs-15 fw-500 d-flex align-items-center"><i class="bi bi-envelope icon-small me-10px align-middle"></i><a href="#" class="text-decoration-line-bottom fw-700 lh-22 text-uppercase" data-bs-toggle="modal" data-bs-target="#request-meeting">Book appointment</a></span> </div>-->
+<!-- end sticky column -->
+<!-- javascript libraries -->
+
+<!--REQUEST A MEETING  Modal -->
+<div class="modal fade" id="request-meeting" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-base-color fs-22 fw-bold" id="request-meetingLabel">Request a meeting</h5> <i class="fas fa-times cursor-pointer" data-bs-dismiss="modal"></i> </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-lg-5 md-mb-50px">
+                        <h2 class="fw-800 text-dark-gray ls-minus-2px">Request a meeting or free assessment</h2> <img src="images/popup-img.png" class="img-fluid"> </div>
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="contact-form-style-05">
+                            <!-- start contact form -->
+                            <form id="reqmeetingform" method="post" role="form" enctype="multipart/form-data">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6 sm-mb-25px">
+                                        <input class="mb-25px form-control required" type="text" name="name" placeholder=" Full Name*" />
+                                        <input class="mb-25px form-control required" type="text" name="title" placeholder="Title" />
+                                        <div class="position-relative form-group">
+                                            <select name="country" id="reqcountry" class="mb-25px form-control required" placeholder="Country" required="" aria-label="Country">
+                                                <option value="0" title="Please Select">Select Your Country</option>
+                                                <option value="Afghanistan" title="Afghanistan">Afghanistan</option>
+                                                <option value="Åland Islands" title="Åland Islands">Åland Islands</option>
+                                                <option value="Albania" title="Albania">Albania</option>
+                                                <option value="Algeria" title="Algeria">Algeria</option>
+                                                <option value="American Samoa" title="American Samoa">American Samoa</option>
+                                                <option value="Andorra" title="Andorra">Andorra</option>
+                                                <option value="Angola" title="Angola">Angola</option>
+                                                <option value="Anguilla" title="Anguilla">Anguilla</option>
+                                                <option value="Antarctica" title="Antarctica">Antarctica</option>
+                                                <option value="Antigua and Barbuda" title="Antigua and Barbuda">Antigua and Barbuda</option>
+                                                <option value="Argentina" title="Argentina">Argentina</option>
+                                                <option value="Armenia" title="Armenia">Armenia</option>
+                                                <option value="Aruba" title="Aruba">Aruba</option>
+                                                <option value="Australia" title="Australia">Australia</option>
+                                                <option value="Austria" title="Austria">Austria</option>
+                                                <option value="Azerbaijan" title="Azerbaijan">Azerbaijan</option>
+                                                <option value="Bahamas" title="Bahamas">Bahamas</option>
+                                                <option value="Bahrain" title="Bahrain">Bahrain</option>
+                                                <option value="Bangladesh" title="Bangladesh">Bangladesh</option>
+                                                <option value="Barbados" title="Barbados">Barbados</option>
+                                                <option value="Belarus" title="Belarus">Belarus</option>
+                                                <option value="Belgium" title="Belgium">Belgium</option>
+                                                <option value="Belize" title="Belize">Belize</option>
+                                                <option value="Benin" title="Benin">Benin</option>
+                                                <option value="Bermuda" title="Bermuda">Bermuda</option>
+                                                <option value="Bhutan" title="Bhutan">Bhutan</option>
+                                                <option value="Bolivia, Plurinational State of" title="Bolivia, Plurinational State of">Bolivia, Plurinational State of</option>
+                                                <option value="Bonaire, Sint Eustatius and Saba" title="Bonaire, Sint Eustatius and Saba">Bonaire, Sint Eustatius and Saba</option>
+                                                <option value="Bosnia and Herzegovina" title="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                                                <option value="Botswana" title="Botswana">Botswana</option>
+                                                <option value="Bouvet Island" title="Bouvet Island">Bouvet Island</option>
+                                                <option value="Brazil" title="Brazil">Brazil</option>
+                                                <option value="British Indian Ocean Territory" title="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                                                <option value="Brunei Darussalam" title="Brunei Darussalam">Brunei Darussalam</option>
+                                                <option value="Bulgaria" title="Bulgaria">Bulgaria</option>
+                                                <option value="Burkina Faso" title="Burkina Faso">Burkina Faso</option>
+                                                <option value="Burundi" title="Burundi">Burundi</option>
+                                                <option value="Cambodia" title="Cambodia">Cambodia</option>
+                                                <option value="Cameroon" title="Cameroon">Cameroon</option>
+                                                <option value="Canada" title="Canada">Canada</option>
+                                                <option value="Cape Verde" title="Cape Verde">Cape Verde</option>
+                                                <option value="Cayman Islands" title="Cayman Islands">Cayman Islands</option>
+                                                <option value="Central African Republic" title="Central African Republic">Central African Republic</option>
+                                                <option value="Chad" title="Chad">Chad</option>
+                                                <option value="Chile" title="Chile">Chile</option>
+                                                <option value="China" title="China">China</option>
+                                                <option value="Christmas Island" title="Christmas Island">Christmas Island</option>
+                                                <option value="Cocos (Keeling) Islands" title="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                                                <option value="Colombia" title="Colombia">Colombia</option>
+                                                <option value="Comoros" title="Comoros">Comoros</option>
+                                                <option value="Congo" title="Congo">Congo</option>
+                                                <option value="Congo, the Democratic Republic of the" title="Congo, the Democratic Republic of the">Congo, the Democratic Republic of the</option>
+                                                <option value="Cook Islands" title="Cook Islands">Cook Islands</option>
+                                                <option value="Costa Rica" title="Costa Rica">Costa Rica</option>
+                                                <option value="Côte d'Ivoire" title="Côte d'Ivoire">Côte d'Ivoire</option>
+                                                <option value="Croatia" title="Croatia">Croatia</option>
+                                                <option value="Cuba" title="Cuba">Cuba</option>
+                                                <option value="Curaçao" title="Curaçao">Curaçao</option>
+                                                <option value="Cyprus" title="Cyprus">Cyprus</option>
+                                                <option value="Czech Republic" title="Czech Republic">Czech Republic</option>
+                                                <option value="Denmark" title="Denmark">Denmark</option>
+                                                <option value="Djibouti" title="Djibouti">Djibouti</option>
+                                                <option value="Dominica" title="Dominica">Dominica</option>
+                                                <option value="Dominican Republic" title="Dominican Republic">Dominican Republic</option>
+                                                <option value="Ecuador" title="Ecuador">Ecuador</option>
+                                                <option value="Egypt" title="Egypt">Egypt</option>
+                                                <option value="El Salvador" title="El Salvador">El Salvador</option>
+                                                <option value="Equatorial Guinea" title="Equatorial Guinea">Equatorial Guinea</option>
+                                                <option value="Eritrea" title="Eritrea">Eritrea</option>
+                                                <option value="Estonia" title="Estonia">Estonia</option>
+                                                <option value="Ethiopia" title="Ethiopia">Ethiopia</option>
+                                                <option value="Falkland Islands (Malvinas)" title="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                                                <option value="Faroe Islands" title="Faroe Islands">Faroe Islands</option>
+                                                <option value="Fiji" title="Fiji">Fiji</option>
+                                                <option value="Finland" title="Finland">Finland</option>
+                                                <option value="France" title="France">France</option>
+                                                <option value="French Guiana" title="French Guiana">French Guiana</option>
+                                                <option value="French Polynesia" title="French Polynesia">French Polynesia</option>
+                                                <option value="French Southern Territories" title="French Southern Territories">French Southern Territories</option>
+                                                <option value="Gabon" title="Gabon">Gabon</option>
+                                                <option value="Gambia" title="Gambia">Gambia</option>
+                                                <option value="Georgia" title="Georgia">Georgia</option>
+                                                <option value="Germany" title="Germany">Germany</option>
+                                                <option value="Ghana" title="Ghana">Ghana</option>
+                                                <option value="Gibraltar" title="Gibraltar">Gibraltar</option>
+                                                <option value="Greece" title="Greece">Greece</option>
+                                                <option value="Greenland" title="Greenland">Greenland</option>
+                                                <option value="Grenada" title="Grenada">Grenada</option>
+                                                <option value="Guadeloupe" title="Guadeloupe">Guadeloupe</option>
+                                                <option value="Guam" title="Guam">Guam</option>
+                                                <option value="Guatemala" title="Guatemala">Guatemala</option>
+                                                <option value="Guernsey" title="Guernsey">Guernsey</option>
+                                                <option value="Guinea" title="Guinea">Guinea</option>
+                                                <option value="Guinea-Bissau" title="Guinea-Bissau">Guinea-Bissau</option>
+                                                <option value="Guyana" title="Guyana">Guyana</option>
+                                                <option value="Haiti" title="Haiti">Haiti</option>
+                                                <option value="Heard Island and McDonald Islands" title="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option>
+                                                <option value="Holy See (Vatican City State)" title="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                                                <option value="Honduras" title="Honduras">Honduras</option>
+                                                <option value="Hong Kong" title="Hong Kong">Hong Kong</option>
+                                                <option value="Hungary" title="Hungary">Hungary</option>
+                                                <option value="Iceland" title="Iceland">Iceland</option>
+                                                <option value="India" title="India">India</option>
+                                                <option value="Indonesia" title="Indonesia">Indonesia</option>
+                                                <option value="Iran, Islamic Republic of" title="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                                                <option value="Iraq" title="Iraq">Iraq</option>
+                                                <option value="Ireland" title="Ireland">Ireland</option>
+                                                <option value="Isle of Man" title="Isle of Man">Isle of Man</option>
+                                                <option value="Israel" title="Israel">Israel</option>
+                                                <option value="Italy" title="Italy">Italy</option>
+                                                <option value="Jamaica" title="Jamaica">Jamaica</option>
+                                                <option value="Japan" title="Japan">Japan</option>
+                                                <option value="Jersey" title="Jersey">Jersey</option>
+                                                <option value="Jordan" title="Jordan">Jordan</option>
+                                                <option value="Kazakhstan" title="Kazakhstan">Kazakhstan</option>
+                                                <option value="Kenya" title="Kenya">Kenya</option>
+                                                <option value="Kiribati" title="Kiribati">Kiribati</option>
+                                                <option value="Korea, Democratic People's Republic of" title="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                                                <option value="Korea, Republic of" title="Korea, Republic of">Korea, Republic of</option>
+                                                <option value="Kuwait" title="Kuwait">Kuwait</option>
+                                                <option value="Kyrgyzstan" title="Kyrgyzstan">Kyrgyzstan</option>
+                                                <option value="Lao People's Democratic Republic" title="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                                                <option value="Latvia" title="Latvia">Latvia</option>
+                                                <option value="Lebanon" title="Lebanon">Lebanon</option>
+                                                <option value="Lesotho" title="Lesotho">Lesotho</option>
+                                                <option value="Liberia" title="Liberia">Liberia</option>
+                                                <option value="Libya" title="Libya">Libya</option>
+                                                <option value="Liechtenstein" title="Liechtenstein">Liechtenstein</option>
+                                                <option value="Lithuania" title="Lithuania">Lithuania</option>
+                                                <option value="Luxembourg" title="Luxembourg">Luxembourg</option>
+                                                <option value="Macao" title="Macao">Macao</option>
+                                                <option value="Macedonia, the former Yugoslav Republic of" title="Macedonia, the former Yugoslav Republic of">Macedonia, the former Yugoslav Republic of</option>
+                                                <option value="Madagascar" title="Madagascar">Madagascar</option>
+                                                <option value="Malawi" title="Malawi">Malawi</option>
+                                                <option value="Malaysia" title="Malaysia">Malaysia</option>
+                                                <option value="Maldives" title="Maldives">Maldives</option>
+                                                <option value="Mali" title="Mali">Mali</option>
+                                                <option value="Malta" title="Malta">Malta</option>
+                                                <option value="Marshall Islands" title="Marshall Islands">Marshall Islands</option>
+                                                <option value="Martinique" title="Martinique">Martinique</option>
+                                                <option value="Mauritania" title="Mauritania">Mauritania</option>
+                                                <option value="Mauritius" title="Mauritius">Mauritius</option>
+                                                <option value="Mayotte" title="Mayotte">Mayotte</option>
+                                                <option value="Mexico" title="Mexico">Mexico</option>
+                                                <option value="Micronesia, Federated States of" title="Micronesia, Federated States of">Micronesia, Federated States of</option>
+                                                <option value="Moldova, Republic of" title="Moldova, Republic of">Moldova, Republic of</option>
+                                                <option value="Monaco" title="Monaco">Monaco</option>
+                                                <option value="Mongolia" title="Mongolia">Mongolia</option>
+                                                <option value="Montenegro" title="Montenegro">Montenegro</option>
+                                                <option value="Montserrat" title="Montserrat">Montserrat</option>
+                                                <option value="Morocco" title="Morocco">Morocco</option>
+                                                <option value="Mozambique" title="Mozambique">Mozambique</option>
+                                                <option value="Myanmar" title="Myanmar">Myanmar</option>
+                                                <option value="Namibia" title="Namibia">Namibia</option>
+                                                <option value="Nauru" title="Nauru">Nauru</option>
+                                                <option value="Nepal" title="Nepal">Nepal</option>
+                                                <option value="Netherlands" title="Netherlands">Netherlands</option>
+                                                <option value="New Caledonia" title="New Caledonia">New Caledonia</option>
+                                                <option value="New Zealand" title="New Zealand">New Zealand</option>
+                                                <option value="Nicaragua" title="Nicaragua">Nicaragua</option>
+                                                <option value="Niger" title="Niger">Niger</option>
+                                                <option value="Nigeria" title="Nigeria">Nigeria</option>
+                                                <option value="Niue" title="Niue">Niue</option>
+                                                <option value="Norfolk Island" title="Norfolk Island">Norfolk Island</option>
+                                                <option value="Northern Mariana Islands" title="Northern Mariana Islands">Northern Mariana Islands</option>
+                                                <option value="Norway" title="Norway">Norway</option>
+                                                <option value="Oman" title="Oman">Oman</option>
+                                                <option value="Pakistan" title="Pakistan">Pakistan</option>
+                                                <option value="Palau" title="Palau">Palau</option>
+                                                <option value="Palestinian Territory, Occupied" title="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
+                                                <option value="Panama" title="Panama">Panama</option>
+                                                <option value="Papua New Guinea" title="Papua New Guinea">Papua New Guinea</option>
+                                                <option value="Paraguay" title="Paraguay">Paraguay</option>
+                                                <option value="Peru" title="Peru">Peru</option>
+                                                <option value="Philippines" title="Philippines">Philippines</option>
+                                                <option value="Pitcairn" title="Pitcairn">Pitcairn</option>
+                                                <option value="Poland" title="Poland">Poland</option>
+                                                <option value="Portugal" title="Portugal">Portugal</option>
+                                                <option value="Puerto Rico" title="Puerto Rico">Puerto Rico</option>
+                                                <option value="Qatar" title="Qatar">Qatar</option>
+                                                <option value="Réunion" title="Réunion">Réunion</option>
+                                                <option value="Romania" title="Romania">Romania</option>
+                                                <option value="Russian Federation" title="Russian Federation">Russian Federation</option>
+                                                <option value="Rwanda" title="Rwanda">Rwanda</option>
+                                                <option value="Saint Barthélemy" title="Saint Barthélemy">Saint Barthélemy</option>
+                                                <option value="Saint Helena, Ascension and Tristan da Cunha" title="Saint Helena, Ascension and Tristan da Cunha">Saint Helena, Ascension and Tristan da Cunha</option>
+                                                <option value="Saint Kitts and Nevis" title="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                                                <option value="Saint Lucia" title="Saint Lucia">Saint Lucia</option>
+                                                <option value="Saint Martin (French part)" title="Saint Martin (French part)">Saint Martin (French part)</option>
+                                                <option value="Saint Pierre and Miquelon" title="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                                                <option value="Saint Vincent and the Grenadines" title="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                                                <option value="Samoa" title="Samoa">Samoa</option>
+                                                <option value="San Marino" title="San Marino">San Marino</option>
+                                                <option value="Sao Tome and Principe" title="Sao Tome and Principe">Sao Tome and Principe</option>
+                                                <option value="Saudi Arabia" title="Saudi Arabia">Saudi Arabia</option>
+                                                <option value="Senegal" title="Senegal">Senegal</option>
+                                                <option value="Serbia" title="Serbia">Serbia</option>
+                                                <option value="Seychelles" title="Seychelles">Seychelles</option>
+                                                <option value="Sierra Leone" title="Sierra Leone">Sierra Leone</option>
+                                                <option value="Singapore" title="Singapore">Singapore</option>
+                                                <option value="Sint Maarten (Dutch part)" title="Sint Maarten (Dutch part)">Sint Maarten (Dutch part)</option>
+                                                <option value="Slovakia" title="Slovakia">Slovakia</option>
+                                                <option value="Slovenia" title="Slovenia">Slovenia</option>
+                                                <option value="Solomon Islands" title="Solomon Islands">Solomon Islands</option>
+                                                <option value="Somalia" title="Somalia">Somalia</option>
+                                                <option value="South Africa" title="South Africa">South Africa</option>
+                                                <option value="South Georgia and the South Sandwich Islands" title="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option>
+                                                <option value="South Sudan" title="South Sudan">South Sudan</option>
+                                                <option value="Spain" title="Spain">Spain</option>
+                                                <option value="Sri Lanka" title="Sri Lanka">Sri Lanka</option>
+                                                <option value="Sudan" title="Sudan">Sudan</option>
+                                                <option value="Suriname" title="Suriname">Suriname</option>
+                                                <option value="Svalbard and Jan Mayen" title="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                                                <option value="Swaziland" title="Swaziland">Swaziland</option>
+                                                <option value="Sweden" title="Sweden">Sweden</option>
+                                                <option value="Switzerland" title="Switzerland">Switzerland</option>
+                                                <option value="Syrian Arab Republic" title="Syrian Arab Republic">Syrian Arab Republic</option>
+                                                <option value="Taiwan, Province of China" title="Taiwan, Province of China">Taiwan, Province of China</option>
+                                                <option value="Tajikistan" title="Tajikistan">Tajikistan</option>
+                                                <option value="Tanzania, United Republic of" title="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                                                <option value="Thailand" title="Thailand">Thailand</option>
+                                                <option value="Timor-Leste" title="Timor-Leste">Timor-Leste</option>
+                                                <option value="Togo" title="Togo">Togo</option>
+                                                <option value="Tokelau" title="Tokelau">Tokelau</option>
+                                                <option value="Tonga" title="Tonga">Tonga</option>
+                                                <option value="Trinidad and Tobago" title="Trinidad and Tobago">Trinidad and Tobago</option>
+                                                <option value="Tunisia" title="Tunisia">Tunisia</option>
+                                                <option value="Turkey" title="Turkey">Turkey</option>
+                                                <option value="Turkmenistan" title="Turkmenistan">Turkmenistan</option>
+                                                <option value="Turks and Caicos Islands" title="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                                                <option value="Tuvalu" title="Tuvalu">Tuvalu</option>
+                                                <option value="Uganda" title="Uganda">Uganda</option>
+                                                <option value="Ukraine" title="Ukraine">Ukraine</option>
+                                                <option value="United Arab Emirates" title="United Arab Emirates">United Arab Emirates</option>
+                                                <option value="United Kingdom" title="United Kingdom">United Kingdom</option>
+                                                <option value="United States" title="United States">United States</option>
+                                                <option value="United States Minor Outlying Islands" title="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                                                <option value="Uruguay" title="Uruguay">Uruguay</option>
+                                                <option value="Uzbekistan" title="Uzbekistan">Uzbekistan</option>
+                                                <option value="Vanuatu" title="Vanuatu">Vanuatu</option>
+                                                <option value="Venezuela, Bolivarian Republic of" title="Venezuela, Bolivarian Republic of">Venezuela, Bolivarian Republic of</option>
+                                                <option value="Viet Nam" title="Viet Nam">Viet Nam</option>
+                                                <option value="Virgin Islands, British" title="Virgin Islands, British">Virgin Islands, British</option>
+                                                <option value="Virgin Islands, U.S." title="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                                                <option value="Wallis and Futuna" title="Wallis and Futuna">Wallis and Futuna</option>
+                                                <option value="Western Sahara" title="Western Sahara">Western Sahara</option>
+                                                <option value="Yemen" title="Yemen">Yemen</option>
+                                                <option value="Zambia" title="Zambia">Zambia</option>
+                                                <option value="Zimbabwe" title="Zimbabwe">Zimbabwe</option>
+                                            </select>
+                                        </div>
+                                        <input class="mb-25px form-control required" type="text" name="city" placeholder="Select your City" aria-label="city" /> </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-25px">
+                                            <input class="mb-25px form-control required" type="text" name="organization" placeholder=" Organization" /> </div>
+                                        <input class="mb-25px form-control required" type="text" name="email" placeholder=" Email*" />
+                                        <textarea class="form-control required" cols="20" rows="4" name="message" placeholder="Your message"></textarea>
+                                    </div>
+                                    <div class="col-md-6 mt-25px sm-mt-20px"> </div>
+                                    <div class="col-md-6 text-center text-md-end mt-25px sm-mt-20px">
+                                        <input type="hidden" name="redirect" value="">
+                                        <button class="btn btn-medium btn-base-color btn-round-edge left-icon btn-box-shadow" type="submit"><i class="bi bi-calendar-check"></i>Submit</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <div id="formMessage" class="mt-3 text-success" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- end contact form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--REQUEST A DEMO/ACCESSMENT  Modal -->
+<div class="modal fade" id="request-demo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-base-color fs-22 fw-bold" id="request-demoLabel"> Request for Demo or Meeting</h5> <i class="fas fa-times cursor-pointer" data-bs-dismiss="modal"></i> </div>
+            <div class="modal-body pb-0">
+                <form id="reqdemoform" class="form-horizontal contact-form-style-03" role="form" method="POST" enctype="multipart/form-data" action="request-demo.php">
+                    <input type="hidden" name="action" value="demoreq">
+                    <input type="hidden" name="trigger" value="general">
+                    <input type="hidden" id="reqfrom" name="reqfrom" value="">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="position-relative form-group mb-3">
+                                <input type="text" id="reqdemoname" name="reqdemoname" class="ps-2 border-radius-0px border-color-extra-medium-gray bg-transparent form-control required" placeholder="Name*" pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+" required="" aria-required="true" title="Firstname Lastname"> <span class="form-icon"><i class="fa fa-user" aria-hidden="true"></i></span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="position-relative form-group mb-3">
+                                <input type="text" id="reqdemoorg" name="reqdemoorg" class="ps-2 border-radius-0px border-color-extra-medium-gray bg-transparent form-control required" placeholder="Organization*" required=""> <span class="form-icon"><i class="fa fa-building" aria-hidden="true"></i></span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="position-relative form-group mb-3">
+                                <input type="text" id="reqdemotitle" name="reqdemotitle" class="ps-2 border-radius-0px border-color-extra-medium-gray bg-transparent form-control required" placeholder="Title"> <span class="form-icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="position-relative form-group mb-3">
+                                <input type="email" id="reqdemoemail" name="reqdemoemail" class="ps-2 border-radius-0px border-color-extra-medium-gray bg-transparent form-control required" placeholder="E-mail*" required=""> <span class="form-icon"><i class="fa fa-envelope" aria-hidden="true"></i></span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="position-relative form-group mb-3">
+                                <!--	<input type="text" id="reqdemocountry" name="reqdemocountry" class="form-control" placeholder="Country*" required /> -->
+                                <select id="reqdemocountry" name="reqdemocountry" class="ps-2 border-radius-0px border-color-extra-medium-gray bg-transparent form-control required" placeholder="Country" required="">
+                                    <option value="0" title="Please Select">Select Your Country</option>
+                                    <option value="Afghanistan" title="Afghanistan">Afghanistan</option>
+                                    <option value="Åland Islands" title="Åland Islands">Åland Islands</option>
+                                    <option value="Albania" title="Albania">Albania</option>
+                                    <option value="Algeria" title="Algeria">Algeria</option>
+                                    <option value="American Samoa" title="American Samoa">American Samoa</option>
+                                    <option value="Andorra" title="Andorra">Andorra</option>
+                                    <option value="Angola" title="Angola">Angola</option>
+                                    <option value="Anguilla" title="Anguilla">Anguilla</option>
+                                    <option value="Antarctica" title="Antarctica">Antarctica</option>
+                                    <option value="Antigua and Barbuda" title="Antigua and Barbuda">Antigua and Barbuda</option>
+                                    <option value="Argentina" title="Argentina">Argentina</option>
+                                    <option value="Armenia" title="Armenia">Armenia</option>
+                                    <option value="Aruba" title="Aruba">Aruba</option>
+                                    <option value="Australia" title="Australia">Australia</option>
+                                    <option value="Austria" title="Austria">Austria</option>
+                                    <option value="Azerbaijan" title="Azerbaijan">Azerbaijan</option>
+                                    <option value="Bahamas" title="Bahamas">Bahamas</option>
+                                    <option value="Bahrain" title="Bahrain">Bahrain</option>
+                                    <option value="Bangladesh" title="Bangladesh">Bangladesh</option>
+                                    <option value="Barbados" title="Barbados">Barbados</option>
+                                    <option value="Belarus" title="Belarus">Belarus</option>
+                                    <option value="Belgium" title="Belgium">Belgium</option>
+                                    <option value="Belize" title="Belize">Belize</option>
+                                    <option value="Benin" title="Benin">Benin</option>
+                                    <option value="Bermuda" title="Bermuda">Bermuda</option>
+                                    <option value="Bhutan" title="Bhutan">Bhutan</option>
+                                    <option value="Bolivia, Plurinational State of" title="Bolivia, Plurinational State of">Bolivia, Plurinational State of</option>
+                                    <option value="Bonaire, Sint Eustatius and Saba" title="Bonaire, Sint Eustatius and Saba">Bonaire, Sint Eustatius and Saba</option>
+                                    <option value="Bosnia and Herzegovina" title="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                                    <option value="Botswana" title="Botswana">Botswana</option>
+                                    <option value="Bouvet Island" title="Bouvet Island">Bouvet Island</option>
+                                    <option value="Brazil" title="Brazil">Brazil</option>
+                                    <option value="British Indian Ocean Territory" title="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                                    <option value="Brunei Darussalam" title="Brunei Darussalam">Brunei Darussalam</option>
+                                    <option value="Bulgaria" title="Bulgaria">Bulgaria</option>
+                                    <option value="Burkina Faso" title="Burkina Faso">Burkina Faso</option>
+                                    <option value="Burundi" title="Burundi">Burundi</option>
+                                    <option value="Cambodia" title="Cambodia">Cambodia</option>
+                                    <option value="Cameroon" title="Cameroon">Cameroon</option>
+                                    <option value="Canada" title="Canada">Canada</option>
+                                    <option value="Cape Verde" title="Cape Verde">Cape Verde</option>
+                                    <option value="Cayman Islands" title="Cayman Islands">Cayman Islands</option>
+                                    <option value="Central African Republic" title="Central African Republic">Central African Republic</option>
+                                    <option value="Chad" title="Chad">Chad</option>
+                                    <option value="Chile" title="Chile">Chile</option>
+                                    <option value="China" title="China">China</option>
+                                    <option value="Christmas Island" title="Christmas Island">Christmas Island</option>
+                                    <option value="Cocos (Keeling) Islands" title="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                                    <option value="Colombia" title="Colombia">Colombia</option>
+                                    <option value="Comoros" title="Comoros">Comoros</option>
+                                    <option value="Congo" title="Congo">Congo</option>
+                                    <option value="Congo, the Democratic Republic of the" title="Congo, the Democratic Republic of the">Congo, the Democratic Republic of the</option>
+                                    <option value="Cook Islands" title="Cook Islands">Cook Islands</option>
+                                    <option value="Costa Rica" title="Costa Rica">Costa Rica</option>
+                                    <option value="Côte d'Ivoire" title="Côte d'Ivoire">Côte d'Ivoire</option>
+                                    <option value="Croatia" title="Croatia">Croatia</option>
+                                    <option value="Cuba" title="Cuba">Cuba</option>
+                                    <option value="Curaçao" title="Curaçao">Curaçao</option>
+                                    <option value="Cyprus" title="Cyprus">Cyprus</option>
+                                    <option value="Czech Republic" title="Czech Republic">Czech Republic</option>
+                                    <option value="Denmark" title="Denmark">Denmark</option>
+                                    <option value="Djibouti" title="Djibouti">Djibouti</option>
+                                    <option value="Dominica" title="Dominica">Dominica</option>
+                                    <option value="Dominican Republic" title="Dominican Republic">Dominican Republic</option>
+                                    <option value="Ecuador" title="Ecuador">Ecuador</option>
+                                    <option value="Egypt" title="Egypt">Egypt</option>
+                                    <option value="El Salvador" title="El Salvador">El Salvador</option>
+                                    <option value="Equatorial Guinea" title="Equatorial Guinea">Equatorial Guinea</option>
+                                    <option value="Eritrea" title="Eritrea">Eritrea</option>
+                                    <option value="Estonia" title="Estonia">Estonia</option>
+                                    <option value="Ethiopia" title="Ethiopia">Ethiopia</option>
+                                    <option value="Falkland Islands (Malvinas)" title="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                                    <option value="Faroe Islands" title="Faroe Islands">Faroe Islands</option>
+                                    <option value="Fiji" title="Fiji">Fiji</option>
+                                    <option value="Finland" title="Finland">Finland</option>
+                                    <option value="France" title="France">France</option>
+                                    <option value="French Guiana" title="French Guiana">French Guiana</option>
+                                    <option value="French Polynesia" title="French Polynesia">French Polynesia</option>
+                                    <option value="French Southern Territories" title="French Southern Territories">French Southern Territories</option>
+                                    <option value="Gabon" title="Gabon">Gabon</option>
+                                    <option value="Gambia" title="Gambia">Gambia</option>
+                                    <option value="Georgia" title="Georgia">Georgia</option>
+                                    <option value="Germany" title="Germany">Germany</option>
+                                    <option value="Ghana" title="Ghana">Ghana</option>
+                                    <option value="Gibraltar" title="Gibraltar">Gibraltar</option>
+                                    <option value="Greece" title="Greece">Greece</option>
+                                    <option value="Greenland" title="Greenland">Greenland</option>
+                                    <option value="Grenada" title="Grenada">Grenada</option>
+                                    <option value="Guadeloupe" title="Guadeloupe">Guadeloupe</option>
+                                    <option value="Guam" title="Guam">Guam</option>
+                                    <option value="Guatemala" title="Guatemala">Guatemala</option>
+                                    <option value="Guernsey" title="Guernsey">Guernsey</option>
+                                    <option value="Guinea" title="Guinea">Guinea</option>
+                                    <option value="Guinea-Bissau" title="Guinea-Bissau">Guinea-Bissau</option>
+                                    <option value="Guyana" title="Guyana">Guyana</option>
+                                    <option value="Haiti" title="Haiti">Haiti</option>
+                                    <option value="Heard Island and McDonald Islands" title="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option>
+                                    <option value="Holy See (Vatican City State)" title="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                                    <option value="Honduras" title="Honduras">Honduras</option>
+                                    <option value="Hong Kong" title="Hong Kong">Hong Kong</option>
+                                    <option value="Hungary" title="Hungary">Hungary</option>
+                                    <option value="Iceland" title="Iceland">Iceland</option>
+                                    <option value="India" title="India">India</option>
+                                    <option value="Indonesia" title="Indonesia">Indonesia</option>
+                                    <option value="Iran, Islamic Republic of" title="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                                    <option value="Iraq" title="Iraq">Iraq</option>
+                                    <option value="Ireland" title="Ireland">Ireland</option>
+                                    <option value="Isle of Man" title="Isle of Man">Isle of Man</option>
+                                    <option value="Israel" title="Israel">Israel</option>
+                                    <option value="Italy" title="Italy">Italy</option>
+                                    <option value="Jamaica" title="Jamaica">Jamaica</option>
+                                    <option value="Japan" title="Japan">Japan</option>
+                                    <option value="Jersey" title="Jersey">Jersey</option>
+                                    <option value="Jordan" title="Jordan">Jordan</option>
+                                    <option value="Kazakhstan" title="Kazakhstan">Kazakhstan</option>
+                                    <option value="Kenya" title="Kenya">Kenya</option>
+                                    <option value="Kiribati" title="Kiribati">Kiribati</option>
+                                    <option value="Korea, Democratic People's Republic of" title="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                                    <option value="Korea, Republic of" title="Korea, Republic of">Korea, Republic of</option>
+                                    <option value="Kuwait" title="Kuwait">Kuwait</option>
+                                    <option value="Kyrgyzstan" title="Kyrgyzstan">Kyrgyzstan</option>
+                                    <option value="Lao People's Democratic Republic" title="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                                    <option value="Latvia" title="Latvia">Latvia</option>
+                                    <option value="Lebanon" title="Lebanon">Lebanon</option>
+                                    <option value="Lesotho" title="Lesotho">Lesotho</option>
+                                    <option value="Liberia" title="Liberia">Liberia</option>
+                                    <option value="Libya" title="Libya">Libya</option>
+                                    <option value="Liechtenstein" title="Liechtenstein">Liechtenstein</option>
+                                    <option value="Lithuania" title="Lithuania">Lithuania</option>
+                                    <option value="Luxembourg" title="Luxembourg">Luxembourg</option>
+                                    <option value="Macao" title="Macao">Macao</option>
+                                    <option value="Macedonia, the former Yugoslav Republic of" title="Macedonia, the former Yugoslav Republic of">Macedonia, the former Yugoslav Republic of</option>
+                                    <option value="Madagascar" title="Madagascar">Madagascar</option>
+                                    <option value="Malawi" title="Malawi">Malawi</option>
+                                    <option value="Malaysia" title="Malaysia">Malaysia</option>
+                                    <option value="Maldives" title="Maldives">Maldives</option>
+                                    <option value="Mali" title="Mali">Mali</option>
+                                    <option value="Malta" title="Malta">Malta</option>
+                                    <option value="Marshall Islands" title="Marshall Islands">Marshall Islands</option>
+                                    <option value="Martinique" title="Martinique">Martinique</option>
+                                    <option value="Mauritania" title="Mauritania">Mauritania</option>
+                                    <option value="Mauritius" title="Mauritius">Mauritius</option>
+                                    <option value="Mayotte" title="Mayotte">Mayotte</option>
+                                    <option value="Mexico" title="Mexico">Mexico</option>
+                                    <option value="Micronesia, Federated States of" title="Micronesia, Federated States of">Micronesia, Federated States of</option>
+                                    <option value="Moldova, Republic of" title="Moldova, Republic of">Moldova, Republic of</option>
+                                    <option value="Monaco" title="Monaco">Monaco</option>
+                                    <option value="Mongolia" title="Mongolia">Mongolia</option>
+                                    <option value="Montenegro" title="Montenegro">Montenegro</option>
+                                    <option value="Montserrat" title="Montserrat">Montserrat</option>
+                                    <option value="Morocco" title="Morocco">Morocco</option>
+                                    <option value="Mozambique" title="Mozambique">Mozambique</option>
+                                    <option value="Myanmar" title="Myanmar">Myanmar</option>
+                                    <option value="Namibia" title="Namibia">Namibia</option>
+                                    <option value="Nauru" title="Nauru">Nauru</option>
+                                    <option value="Nepal" title="Nepal">Nepal</option>
+                                    <option value="Netherlands" title="Netherlands">Netherlands</option>
+                                    <option value="New Caledonia" title="New Caledonia">New Caledonia</option>
+                                    <option value="New Zealand" title="New Zealand">New Zealand</option>
+                                    <option value="Nicaragua" title="Nicaragua">Nicaragua</option>
+                                    <option value="Niger" title="Niger">Niger</option>
+                                    <option value="Nigeria" title="Nigeria">Nigeria</option>
+                                    <option value="Niue" title="Niue">Niue</option>
+                                    <option value="Norfolk Island" title="Norfolk Island">Norfolk Island</option>
+                                    <option value="Northern Mariana Islands" title="Northern Mariana Islands">Northern Mariana Islands</option>
+                                    <option value="Norway" title="Norway">Norway</option>
+                                    <option value="Oman" title="Oman">Oman</option>
+                                    <option value="Pakistan" title="Pakistan">Pakistan</option>
+                                    <option value="Palau" title="Palau">Palau</option>
+                                    <option value="Palestinian Territory, Occupied" title="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
+                                    <option value="Panama" title="Panama">Panama</option>
+                                    <option value="Papua New Guinea" title="Papua New Guinea">Papua New Guinea</option>
+                                    <option value="Paraguay" title="Paraguay">Paraguay</option>
+                                    <option value="Peru" title="Peru">Peru</option>
+                                    <option value="Philippines" title="Philippines">Philippines</option>
+                                    <option value="Pitcairn" title="Pitcairn">Pitcairn</option>
+                                    <option value="Poland" title="Poland">Poland</option>
+                                    <option value="Portugal" title="Portugal">Portugal</option>
+                                    <option value="Puerto Rico" title="Puerto Rico">Puerto Rico</option>
+                                    <option value="Qatar" title="Qatar">Qatar</option>
+                                    <option value="Réunion" title="Réunion">Réunion</option>
+                                    <option value="Romania" title="Romania">Romania</option>
+                                    <option value="Russian Federation" title="Russian Federation">Russian Federation</option>
+                                    <option value="Rwanda" title="Rwanda">Rwanda</option>
+                                    <option value="Saint Barthélemy" title="Saint Barthélemy">Saint Barthélemy</option>
+                                    <option value="Saint Helena, Ascension and Tristan da Cunha" title="Saint Helena, Ascension and Tristan da Cunha">Saint Helena, Ascension and Tristan da Cunha</option>
+                                    <option value="Saint Kitts and Nevis" title="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                                    <option value="Saint Lucia" title="Saint Lucia">Saint Lucia</option>
+                                    <option value="Saint Martin (French part)" title="Saint Martin (French part)">Saint Martin (French part)</option>
+                                    <option value="Saint Pierre and Miquelon" title="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                                    <option value="Saint Vincent and the Grenadines" title="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                                    <option value="Samoa" title="Samoa">Samoa</option>
+                                    <option value="San Marino" title="San Marino">San Marino</option>
+                                    <option value="Sao Tome and Principe" title="Sao Tome and Principe">Sao Tome and Principe</option>
+                                    <option value="Saudi Arabia" title="Saudi Arabia">Saudi Arabia</option>
+                                    <option value="Senegal" title="Senegal">Senegal</option>
+                                    <option value="Serbia" title="Serbia">Serbia</option>
+                                    <option value="Seychelles" title="Seychelles">Seychelles</option>
+                                    <option value="Sierra Leone" title="Sierra Leone">Sierra Leone</option>
+                                    <option value="Singapore" title="Singapore">Singapore</option>
+                                    <option value="Sint Maarten (Dutch part)" title="Sint Maarten (Dutch part)">Sint Maarten (Dutch part)</option>
+                                    <option value="Slovakia" title="Slovakia">Slovakia</option>
+                                    <option value="Slovenia" title="Slovenia">Slovenia</option>
+                                    <option value="Solomon Islands" title="Solomon Islands">Solomon Islands</option>
+                                    <option value="Somalia" title="Somalia">Somalia</option>
+                                    <option value="South Africa" title="South Africa">South Africa</option>
+                                    <option value="South Georgia and the South Sandwich Islands" title="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option>
+                                    <option value="South Sudan" title="South Sudan">South Sudan</option>
+                                    <option value="Spain" title="Spain">Spain</option>
+                                    <option value="Sri Lanka" title="Sri Lanka">Sri Lanka</option>
+                                    <option value="Sudan" title="Sudan">Sudan</option>
+                                    <option value="Suriname" title="Suriname">Suriname</option>
+                                    <option value="Svalbard and Jan Mayen" title="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                                    <option value="Swaziland" title="Swaziland">Swaziland</option>
+                                    <option value="Sweden" title="Sweden">Sweden</option>
+                                    <option value="Switzerland" title="Switzerland">Switzerland</option>
+                                    <option value="Syrian Arab Republic" title="Syrian Arab Republic">Syrian Arab Republic</option>
+                                    <option value="Taiwan, Province of China" title="Taiwan, Province of China">Taiwan, Province of China</option>
+                                    <option value="Tajikistan" title="Tajikistan">Tajikistan</option>
+                                    <option value="Tanzania, United Republic of" title="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                                    <option value="Thailand" title="Thailand">Thailand</option>
+                                    <option value="Timor-Leste" title="Timor-Leste">Timor-Leste</option>
+                                    <option value="Togo" title="Togo">Togo</option>
+                                    <option value="Tokelau" title="Tokelau">Tokelau</option>
+                                    <option value="Tonga" title="Tonga">Tonga</option>
+                                    <option value="Trinidad and Tobago" title="Trinidad and Tobago">Trinidad and Tobago</option>
+                                    <option value="Tunisia" title="Tunisia">Tunisia</option>
+                                    <option value="Turkey" title="Turkey">Turkey</option>
+                                    <option value="Turkmenistan" title="Turkmenistan">Turkmenistan</option>
+                                    <option value="Turks and Caicos Islands" title="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                                    <option value="Tuvalu" title="Tuvalu">Tuvalu</option>
+                                    <option value="Uganda" title="Uganda">Uganda</option>
+                                    <option value="Ukraine" title="Ukraine">Ukraine</option>
+                                    <option value="United Arab Emirates" title="United Arab Emirates">United Arab Emirates</option>
+                                    <option value="United Kingdom" title="United Kingdom">United Kingdom</option>
+                                    <option value="United States" title="United States">United States</option>
+                                    <option value="United States Minor Outlying Islands" title="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                                    <option value="Uruguay" title="Uruguay">Uruguay</option>
+                                    <option value="Uzbekistan" title="Uzbekistan">Uzbekistan</option>
+                                    <option value="Vanuatu" title="Vanuatu">Vanuatu</option>
+                                    <option value="Venezuela, Bolivarian Republic of" title="Venezuela, Bolivarian Republic of">Venezuela, Bolivarian Republic of</option>
+                                    <option value="Viet Nam" title="Viet Nam">Viet Nam</option>
+                                    <option value="Virgin Islands, British" title="Virgin Islands, British">Virgin Islands, British</option>
+                                    <option value="Virgin Islands, U.S." title="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                                    <option value="Wallis and Futuna" title="Wallis and Futuna">Wallis and Futuna</option>
+                                    <option value="Western Sahara" title="Western Sahara">Western Sahara</option>
+                                    <option value="Yemen" title="Yemen">Yemen</option>
+                                    <option value="Zambia" title="Zambia">Zambia</option>
+                                    <option value="Zimbabwe" title="Zimbabwe">Zimbabwe</option>
+                                </select> <span class="form-icon"><i class="fa fa-globe" aria-hidden="true"></i></span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="position-relative form-group mb-3">
+                                <input type="tel" id="reqdemophone" name="reqdemophone" class="ps-2 border-radius-0px border-color-extra-medium-gray bg-transparent form-control required" placeholder="Phone Number*" pattern="([0|\+[0-9]{1,5})?([1-9][0-9]{9})" requried="" title="Enter phone number" max="12"> <span class="form-icon"><i class="fa fa-phone" aria-hidden="true"></i></span> </div>
+                        </div>
+                    </div>
+                    <div id="event-datetime-ctrl" class="row">
+                             <div class="col-md-6">
+                            <div class="position-relative form-group mb-3">
+                                <select id="demoreqdate" name="reqdate" class="ps-2 border-radius-0px border-color-extra-medium-gray bg-transparent form-control required" placeholder="Date">
+                                    <option value="" title="Please Select">Areas of Interest in products</option>
+                                    <option value="Intake Suite">Intake Suite</option>
+                                    <option value="Review & Submissions">Review & Submissions</option>
+                                    <option value="Oversight Suite">Oversight Suite</option>
+                                    <option value="Utilities">Utilities</option>
+                                   
+                                </select> 
+                                <span class="form-icon"><i class="fa-solid fa-square-check"></i></span> 
+                                </div>
+                             </div> 
+                            <div class="col-md-6">
+                            <div class="position-relative form-group mb-3">
+                 
+                                <select id="demoreqserv" name="reqserv" class="ps-2 border-radius-0px border-color-extra-medium-gray bg-transparent form-control required" placeholder="Date">
+                                    <option value="" title="Please Select">Areas of Interest in services</option>
+                                    <option value="PV regulatory compliance">PV regulatory compliance</option>
+                                    <option value="Safety Database Implementation & Upgrades">Safety Database Implementation & Upgrades</option>
+                                    <option value="Data Migration">Data Migration</option>
+                                    <option value="PV reporting">PV reporting</option>
+                                    <option value="Project Management">Project Management</option>
+                                    <option value="Hosting & Managed Services">Hosting & Managed Services</option>
+                                    <option value="Japan Consulting">Japan Consulting</option>
+                                </select> 
+                                <span class="form-icon"><i class="fa-solid fa-square-check"></i></span> 
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="position-relative form-group mb-1">
+                                <textarea id="reqdemomessage" name="reqdemomessage" class="ps-2 border-radius-0px border-color-extra-medium-gray bg-transparent form-control" rows="2" placeholder="Message*"></textarea> <span class="form-icon"><i class="fa fa-quote-right" aria-hidden="true"></i></span> </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mt-2">
+                        <div class="col-md-7">
+                        <div class="g-recaptcha" data-sitekey="6Le1s1MsAAAAAOdrVfE39nUpgcAKcvQ1IY39osgH"></div>
+                        </div>
+                        <!--
+                        <input type="hidden" id="reqdemo_nonce" name="reqdemo_nonce" value="e00ab49182">
+                        <input type="hidden" name="_wp_http_referer" value="/">
+                        -->
+                        <div class="col-md-5 text-end">
+                         <input type="hidden" name="redirect" value="">
+                        <button class="btn btn-sm border-2 border-color-light-gray btn-round-edge" type="reset">Clear</button>
+                        <button class="btn btn-sm btn-dark-gray btn-box-shadow btn-round-edge text-transform-none primary-font submit" type="submit">Send Request</button>
+                    </div></div>
+                </form>
+            </div>
+            <div class="modal-footer border-top-0">
+                <div id="formMessageone" class="mt-3 text-success" style="display: none;"></div>
+                <!--<div id="ajaxoutput2" class="mt-2 text-start"></div>-->
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="https://www.vitrana.com/js/jquery.js"></script>
+<script type="text/javascript" src="https://www.vitrana.com/js/vendors.min.js" defer></script>
+<script type="text/javascript" src="https://www.vitrana.com/js/main.js" defer></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
+
+                                                                         
+       <script>
+            // Smooth scroll
+            $('#toc a').on('click', function (e) {
+                e.preventDefault();
+                const target = $($(this).attr('href'));
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 10
+                }, 500);
+            });
+            // Active ToC item on scroll
+            $(window).on('scroll', function () {
+                let scrollPos = $(window).scrollTop();
+                $('#toc a').each(function () {
+                    let section = $($(this).attr('href'));
+                    if (scrollPos >= section.offset().top - 20) {
+                        $('#toc a').removeClass('active');
+                        $(this).addClass('active');
+                    }
+                });
+            });
+        </script>
+        <script>
+$(document).ready(function() {
+    // Remove any default handlers from main.js for this specific form
+    $('#reqdemoform').off('submit');
+    $('#reqdemoform .submit').off('click');
+    
+    // Reset form when modal is opened
+    $('#request-demo').on('show.bs.modal', function () {
+        var formObj = $('#reqdemoform');
+        formObj[0].reset();
+        formObj.find('.is-invalid').removeClass('is-invalid');
+        formObj.find('.is-valid').removeClass('is-valid');
+        $('#formMessageone').hide().html('');
+    });
+    
+    // Handle form submission
+    $('#reqdemoform').on('submit', function(e) {
+        e.preventDefault();
+        
+        var error = false;
+        var formObj = $(this);
+        var submitBtn = formObj.find('.submit');
+        var emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var telFormat = /^[0-9\s\-\+\(\)]+$/;
+        var actionURL = formObj.attr('action');
+        var messageDiv = $('#formMessageone');
+        
+        // Clear previous validation states
+        formObj.find('.required').removeClass('is-invalid is-valid');
+        messageDiv.hide().html('');
+        
+        // Validate required fields
+        formObj.find('.required').each(function() {
+            var fieldVal = $.trim($(this).val());
+            var fieldType = $(this).attr('type');
+            
+            if (fieldVal === '' || fieldVal === '0') {
+                error = true;
+                $(this).addClass('is-invalid');
+            } else if (fieldType === 'email' && !emailFormat.test(fieldVal)) {
+                error = true;
+                $(this).addClass('is-invalid');
+            } else if (fieldType === 'tel' && !telFormat.test(fieldVal)) {
+                error = true;
+                $(this).addClass('is-invalid');
+            } else {
+                $(this).addClass('is-valid');
+            }
+        });
+        
+        // If validation fails, show error message
+        if (error) {
+            messageDiv.removeClass('text-success').addClass('text-danger')
+                .html('Please fill in all required fields correctly.')
+                .fadeIn();
+            return false;
+        }
+        
+        // If validation passes, submit via AJAX
+        if (!error && actionURL) {
+            submitBtn.prop('disabled', true).addClass('loading');
+            
+            $.ajax({
+                type: 'POST',
+                url: actionURL,
+                data: formObj.serialize(),
+                dataType: 'json',
+                timeout: 30000,
+                success: function(result) {
+                    submitBtn.prop('disabled', false).removeClass('loading');
+                    
+                    console.log('Form submission result:', result); // Debug log
+                    
+                    // Check for success
+                    if (result && (result.status === 'success' || result.success === true)) {
+                        // Show success message with fallback text
+                        var successMsg = result.msg || result.message || 'Thank you! Your request has been submitted successfully.';
+                        
+                        messageDiv.removeClass('text-danger')
+                            .addClass('text-success')
+                            .html(successMsg)
+                            .fadeIn()
+                            .css('display', 'block'); // Force display
+                        
+                        // Reset form on success
+                        formObj[0].reset();
+                        formObj.find('.is-valid').removeClass('is-valid');
+                        
+                        // Close modal after 3 seconds - improved logic
+                        setTimeout(function() {
+                            // Try Bootstrap 5 first
+                            var modalEl = document.getElementById('request-demo');
+                            if (modalEl) {
+                                // Bootstrap 5 method
+                                if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+                                    var modalInstance = bootstrap.Modal.getInstance(modalEl);
+                                    if (modalInstance) {
+                                        modalInstance.hide();
+                                    } else {
+                                        // Create and hide if instance doesn't exist
+                                        var newModal = new bootstrap.Modal(modalEl);
+                                        newModal.hide();
+                                    }
+                                } 
+                                // Bootstrap 4 fallback
+                                else if ($.fn.modal) {
+                                    $('#request-demo').modal('hide');
+                                }
+                            }
+                            
+                            // Clean up backdrop after modal closes
+                            setTimeout(function() {
+                                $('.modal-backdrop').remove();
+                                $('body').removeClass('modal-open').css({
+                                    'overflow': '',
+                                    'padding-right': ''
+                                });
+                            }, 500);
+                        }, 3000);
+                        
+                    } else {
+                        // Show error message
+                        var errorMsg = result.msg || result.message || result.error || 'An error occurred. Please try again.';
+                        messageDiv.removeClass('text-success')
+                            .addClass('text-danger')
+                            .html(errorMsg)
+                            .fadeIn();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    submitBtn.prop('disabled', false).removeClass('loading');
+                    console.error('AJAX Error:', status, error, xhr); // Debug log
+                    
+                    var errorMsg = 'An error occurred. Please try again later.';
+                    if (status === 'timeout') {
+                        errorMsg = 'Request timed out. Please try again.';
+                    } else if (xhr.status === 404) {
+                        errorMsg = 'Form submission endpoint not found.';
+                    } else if (xhr.status === 500) {
+                        errorMsg = 'Server error. Please try again later.';
+                    }
+                    
+                    messageDiv.removeClass('text-success')
+                        .addClass('text-danger')
+                        .html(errorMsg)
+                        .fadeIn();
+                }
+            });
+        }
+        
+        return false;
+    });
+    
+    // Also handle direct click on submit button (backup)
+    $(document).on('click', '#reqdemoform .submit', function(e) {
+        e.preventDefault();
+        $('#reqdemoform').trigger('submit');
+        return false;
+    });
+});
+</script>
+ <!--contact us page js for form       -->
+<script>
+const _cf = document.getElementById("contactForm");
+if (_cf) {
+    _cf.addEventListener("submit", function(e) {
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const form = this;
+    const formResults = form.querySelector(".form-results");
+
+    fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+    })
+    .then(response => response.json())
+    .then(data => {
+        formResults.classList.remove("d-none");
+        formResults.innerHTML = `
+            <div class="alert alert-${data.status === "success" ? "success" : "danger"}">
+                ${data.message}
+            </div>
+        `;
+
+        if (data.status === "success") {
+            form.reset();
+        }
+    })
+    .catch(() => {
+        formResults.classList.remove("d-none");
+        formResults.innerHTML = `
+            <div class="alert alert-danger">
+                Server error. Please try again later.
+            </div>
+        `;
+    });
+});
+    });
+};
+</script>
+<script>
+    const banner = document.getElementById('cookieBanner');
+    const acceptBtn = document.getElementById('acceptCookies');
+
+    // Hide banner if already accepted
+    if (localStorage.getItem('cookiesAccepted') === 'true') {
+        banner.style.display = 'none';
+    }
+
+    acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'true');
+
+        // Trigger fade-out animation
+        banner.classList.add('hide');
+
+        // Remove from DOM after animation
+        setTimeout(() => {
+            banner.style.display = 'none';
+        }, 400);
+    });
+</script>
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    const target = document.querySelector(this.getAttribute('href'));
+
+    if (target) {
+      const offset = 0; // navbar height
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = target.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  });
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+# ── 个人备考材料（不对外）──
+docs/interview-answers.md
+docs/interview-rag-agent.md
+docs/rag-methodology.md
+
+# ── 运行时产物（不入库）──
+volumes/
+data/traces/
+data/inbox/processed/
+reports/
+
+# ── 密钥与本地配置 ──
+.env
+
+# ── Python ──
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# ── 系统 ──
+.DS_Store
+.idea/

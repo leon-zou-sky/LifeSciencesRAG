@@ -1,0 +1,106 @@
+{
+  "_comment": "黄金集探针配置：固定输入 + 期望行为 + 基线分数。每次数据入库/模型变更/阈值调整后跑 scripts/regression.py。探针只增不改；线上 badcase 修复后固化成新探针。阈值与漂移容差已迁至 config/thresholds.yaml（单一事实源），本文件只存探针与基线。",
+  "model": "bge-small-zh-v1.5",
+  "_baseline_recorded": "2026-08-18，重基线（换模型重标定后重录），模型=bge-small-zh-v1.5",
+  "inquiry_probes": [
+    {
+      "input": "阿托伐他汀钙片可以和红霉素一起服用吗",
+      "expect_drugs": [
+        "阿托伐他汀",
+        "红霉素"
+      ],
+      "expect_verdict": "duplicate",
+      "expect_top1": "阿托伐他汀可以和红霉素联用吗",
+      "baseline_score": 0.9328,
+      "note": "几乎原文重复，必须自动判重"
+    },
+    {
+      "input": "立普妥能和抗生素一起吃吗",
+      "expect_drugs": [
+        "阿托伐他汀"
+      ],
+      "expect_verdict": "gray",
+      "expect_top1": "阿托伐他汀可以和红霉素联用吗",
+      "baseline_score": 0.8098,
+      "note": "商品名+表述泛化（抗生素vs红霉素），落灰色带"
+    },
+    {
+      "input": "他汀类降脂药能不能和红霉素一起吃",
+      "expect_drugs": [
+        "红霉素"
+      ],
+      "expect_verdict": "gray",
+      "expect_top1": "阿托伐他汀可以和红霉素联用吗",
+      "baseline_score": 0.7851,
+      "note": "类别泛化，灰色带上沿"
+    },
+    {
+      "input": "格华止和诺和泰能一起用不",
+      "expect_drugs": [
+        "二甲双胍",
+        "司美格鲁肽"
+      ],
+      "expect_verdict": "gray",
+      "expect_top1": "司美格鲁肽和恩格列净可以联合使用吗",
+      "baseline_score": 0.7673,
+      "note": "双商品名归一；与底库#3共享一个药+联用意图，落灰色合理"
+    },
+    {
+      "input": "二甲双瓜缓释片怎么吃",
+      "expect_drugs": [
+        "二甲双胍"
+      ],
+      "expect_verdict": "new",
+      "expect_top1": "二甲双胍在肾功能不全的患者中可以使用吗",
+      "baseline_score": 0.645,
+      "note": "错别字归一；用法类是新问题"
+    },
+    {
+      "input": "华法令和可达龙一起吃要注意什么",
+      "expect_drugs": [
+        "华法林",
+        "胺碘酮"
+      ],
+      "expect_verdict": "new",
+      "expect_top1": null,
+      "baseline_score": 0.5341,
+      "note": "错别字+商品名混合；底库无此组合，应是新问题"
+    },
+    {
+      "input": "阿托伐他汀可以和克拉霉素联用吗",
+      "expect_drugs": [
+        "阿托伐他汀",
+        "克拉霉素"
+      ],
+      "expect_verdict": "gray",
+      "expect_top1": "阿托伐他汀可以和红霉素联用吗",
+      "baseline_score": 0.9408,
+      "note": "一字之差难负样本（红霉素→克拉霉素，语义结构同构）：实测 0.9408 远超判重线 0.85——纯向量必误判 duplicate，护栏强制降人工闸，任何模型刻度下都永不自动判重（src/dedup_guard.py）"
+    },
+    {
+      "input": "吃那个降脂的药浑身疼是怎么回事",
+      "expect_drugs": [],
+      "expect_verdict": "new",
+      "expect_top1": null,
+      "baseline_score": 0.3848,
+      "note": "无药名口语化，归一层提不到药是正确行为"
+    }
+  ],
+  "document_probes": [
+    {
+      "input": "依折麦布和阿托伐他汀可以联用吗",
+      "expect_top1_source": "依折麦布片说明书",
+      "expect_authority": "A",
+      "baseline_score": 0.7271,
+      "note": "采集管道进来的 PDF 说明书必须可检索"
+    },
+    {
+      "input": "阿托伐他汀和红霉素联用需要注意什么",
+      "expect_top1_source": "阿托伐他汀钙片",
+      "expect_authority": "A",
+      "expect_version": "2024.03",
+      "baseline_score": 0.7191,
+      "note": "说明书相互作用章节应被命中；且必须是现行版（v2023 旧版无红霉素警示，命中即过期口径泄漏）"
+    }
+  ]
+}
