@@ -1,0 +1,20 @@
+# 稳态锚定值 —— 演练/客户标定/负对照结束后，DB threshold_config 必须回到这些值
+#
+# 用途：scripts/reconcile_thresholds.py 逐键对账，exit 1 = 有键偏离锚定值，禁止收工。
+# 背景：2026-08-25 演练漏回滚 inquiry.duplicate 造成混合态（dup=演练值/new=现役值），
+#       回归输出对阈值不敏感（score 列与阈值无关），行为测试发现不了——
+#       配置状态只能对账断言，不能靠行为反推（演练文档 §2）。
+#
+# 现役值变更流程：先走完整重标定四级门禁（runbook 附录 A），终审通过后同步更新本文件。
+
+model: bge-small-zh-v1.5
+
+inquiry.duplicate: 0.85      # 问询判重上限（2026-08-17 重标定终审值）
+inquiry.new: 0.70            # 问询判重下限
+
+case_report.duplicate: 0.87  # 病例并案上限（2026-08-19 重锚，G-01）
+case_report.gray: 0.78       # 病例并案下限
+
+generation.draft_min_top1: 0.60  # 生成层资格闸（2026-08-18 重锚，G-05）
+
+tolerance: 0.03              # 回归漂移容差

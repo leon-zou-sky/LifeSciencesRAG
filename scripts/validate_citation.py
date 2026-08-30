@@ -30,7 +30,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from src.citation_check import validate_draft
+from src.citation_check import validate_draft_text as validate_draft
 
 
 def _fmt(result: dict, draft: str = "") -> str:

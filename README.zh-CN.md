@@ -84,6 +84,7 @@ LLM 起草层用本地 Ollama（qwen3:4b）或火山引擎 Ark 接口（`.env` �
 | 文档 | 内容 |
 |---|---|
 | [docs/poc-overview-print.md](docs/poc-overview-print.md) | **方案速览（打印版）**：一页看懂 + 细节备查 |
+| [docs/compliance-system-design.md](docs/compliance-system-design.md) | **双体系总纲**：业务系统 × 验证合规体系分家设计——组成清单/变更控制/治理铁律/缺口台账 |
 | [docs/design-overview-en.md](docs/design-overview-en.md) | **Design overview (English, condensed)** |
 | [docs/vector-db-construction-design.md](docs/vector-db-construction-design.md) | 构建设计 + 第 6 章实测驱动的设计迭代（15 条） |
 | [docs/rag-engineering-standards.md](docs/rag-engineering-standards.md) | 代码工程规范 17 条（团队范本，每条带事故溯源） |

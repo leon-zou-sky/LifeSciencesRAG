@@ -32,7 +32,7 @@ from sentence_transformers import SentenceTransformer
 from src.citation_check import validate_draft
 from src.dedup_guard import classify
 from src.encoding import encode_symmetric
-from src.llm import LLM_CONFIG, PROMPT_VERSION, draft_answer, model_digest, redraft_with_feedback
+from src.llm import LLM_CONFIG, PROMPT_VERSION, draft_answer, model_digest, redraft_with_feedback, render_draft
 from src.normalization import extract_drugs
 from src.pii_guard import redact as redact_pii
 from src.thresholds import load_model_path, load_thresholds
@@ -145,16 +145,16 @@ def run(question: str, asker: str) -> dict:
             trace.update(disposition="coverage_gap", missing_drugs=missing)
             return trace
 
-        # ②③④ 起草 → 校验 → 有界重试（prompt 内不含 PII）
-        draft = draft_answer(question_redacted, chunks)
-        result = validate_draft(draft, chunks)
+        # ②③④ 起草 → 校验 → 有界重试（prompt 内不含 PII；草稿为 JSON 结构契约 gp-2.0）
+        struct = draft_answer(question_redacted, chunks)
+        result = validate_draft(struct, chunks)
         trace["llm"]["attempts"] = 1
         while result["disposition"] == "failed" and trace["llm"]["attempts"] <= LLM_CONFIG["max_retries"]:
-            draft = redraft_with_feedback(question_redacted, chunks, draft, result["errors"])
-            result = validate_draft(draft, chunks)
+            struct = redraft_with_feedback(question_redacted, chunks, struct["_raw"], result["errors"])
+            result = validate_draft(struct, chunks)
             trace["llm"]["attempts"] += 1
 
-        trace["draft"] = draft
+        trace["draft"] = render_draft(struct)
         trace["validation"] = result
         trace["disposition"] = {"passed": "draft_passed",
                                 "refusal": "insufficient_evidence",

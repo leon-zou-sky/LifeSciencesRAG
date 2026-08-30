@@ -461,6 +461,34 @@ dense + sparse 双通道召回
 
 **GxP 映射**：变更控制三要素（谁/为什么/何时）由工具强制；历史表满足审计追溯；运行时阈值冻结不变（进程内缓存，重启生效）——同一输入同一输出。
 
+### 6.18 草稿输出 JSON 结构契约：格式笼子从约定变成强制（gp-2.0）
+
+**动机**：gp-1.x 的草稿契约是 prompt 软约束——"请在文末写后缀""请用【n】标注引用"，模型遵守是自觉，不遵守靠引用校验兜底。调研 2.9 生产对齐路线②的落地：把格式要求从约定下沉为解码级约束。
+
+**三层变化**：
+
+| 层 | gp-1.x（软约束） | gp-2.0（结构契约） |
+|---|---|---|
+| 输出形态 | 自由文本 + 文中【n】标记 | `{"refusal": bool, "reason": str, "statements": [{"text", "citations": [int]}]}`，Ollama `format: json` 服务端保证合法 JSON |
+| 引用断言 | 正则扫文本找【n】 | 字段校验：每条陈述 citations 非空 + 编号在界内 |
+| 复核后缀 | 模型必须记得写（漏写 = 校验失败） | **渲染层强制附加**——边界标记是管道行为，不再依赖模型自觉 |
+
+**新增的确定性断言**（citation_check.validate_draft 结构化版）：JSON 解析失败硬失败进重试；refusal 与 statements 互斥（拒答却带陈述 = 契约违反）；拒答 reason 必填（人复核时的判断依据）。文本模式校验保留为 `validate_draft_text`——`scripts/validate_citation.py` 中间件面向任意 RAG 的自由文本输出，两种契约各归其位。
+
+**trace 不变式**：落盘的 `draft` 仍是渲染后的可读文本（`render_draft`），历史 trace 与新 trace 同构，审计复现逻辑零改动。prompt 版本 gp-1.1 → gp-2.0 随 trace 留痕。
+
+**gp-2.1 补丁（冒烟探针抓到的契约回归）**：gp-2.0 首跑 ANS-06 翻绿为红——部分重叠场景（二甲双胍有资料、利伐沙班没有）下模型拿一半资料硬答。根因不是模型波动，是铁律 3 的字面缺口："所有资料都不涉及"的表述不覆盖"部分覆盖"。补明文条款（部分覆盖必须拒答、reason 点名缺药）+ 第二个拒答示例后回归 6/6。**教训：改输出契约时，prompt 里每一条行为规则的边界都要重新审一遍——JSON 化改变了模型对规则的执行路径，旧契约下"靠领悟"通过的场景会在新契约下按字面翻车。**
+
+**gp-2.2 → gp-2.4（ANS-06 三连红的逐轮定位，2026-08-28~30）**：
+
+| 版本 | ANS-06 现象 | 根因 | 修法 |
+|---|---|---|---|
+| gp-2.1 | draft_passed | think:false 下模型跳过"问题药品 vs 资料"核对，直接罗列资料里的事实——形式引用全合法、语义全不相关 | gp-2.2 先补"拒答唯一合法形式"（模型一度把拒答解释写成无引用陈述，draft_failed_human） |
+| gp-2.3 | — | 隐性 reasoning 不可判 | **契约加 `coverage` 字段**：逐实体核对强制前置（结构化 reasoning），任一 false 必须拒答；`coverage=false 却 refusal=false` 是机器可判的契约违反（validate_draft 硬失败）→ ANS-06 绿 |
+| gp-2.4 | ANS-02 变红 | 副作用：模型把"乳酸酸中毒"（不良反应主题词，非药品）当独立药品标 false，过度拒答——且 prompt 只有拒答示例，诱导拒答偏置 | coverage 键明确为"药品或主题词"、判定标准"有实质内容即 true"、**补起草正例**平衡示例分布 → 6/6 全绿 |
+
+**模式总结**：把"模型应该想过什么"从隐性推理变成显式结构化字段，再给字段间一致性加机器可判断言——这是 prompt 软约束之后、语义忠实度人工复核之前的中间层。两个副作用教训：① 示例分布即偏置（只给拒答例 → 过度拒答）；② coverage 这类核对字段的"键集合定义"必须精确到词类（药品 vs 主题词），否则模型自行扩列。
+
 ---
 
 ## 7. 实施清单
@@ -482,7 +510,7 @@ dense + sparse 双通道召回
 - [x] `src/encoding.py` — 对称/非对称查询编码分离（见 6.12）
 - [x] `docs/validation/` + `scripts/gen_validation_pack.py` — GxP 验证包（见第 8 章）
 - [x] `src/llm.py` + `src/citation_check.py` + `scripts/answer.py` — LLM 生成层（资格闸+grounded 起草+引用校验+留痕，见 6.13）
-- [x] `scripts/test_answers.py` + `config/answer_golden.json` — 生成层冒烟探针（3 条，暂不进 PQ，G-06）
+- [x] `scripts/test_answers.py` + `config/answer_golden.json` — 生成层冒烟探针（6 条，暂不进 PQ，G-06）
 - [x] `src/dedup_guard.py` — 药品集合规则护栏（四判重点统一 classify，见 6.14，G-04 关闭）
 - [ ] ⑤ `competitor_inserts`（可选）
 - [ ] 黄金集扩充：病例并案探针、角色视图探针
@@ -490,6 +518,10 @@ dense + sparse 双通道召回
 ---
 
 ## 8. 验证文档层（GxP 验证包）
+
+> **体系总纲已独立成文**：[compliance-system-design.md](compliance-system-design.md)——
+> 业务系统 × 验证合规体系的分家设计（两体系组成、变更控制、治理铁律、缺口台账）。
+> 本章聚焦验证文档层的目录与证据映射，是总纲"体系 B 第 3.3 层"的实现细节。
 
 > 第 6 章解决"系统做得对不对"，本章解决"怎么向审计证明做得对"——
 > 把代码+配置+输出日志包装为正式验证文档。方法论谱系（V 模型 IQ/OQ/PQ、SR 11-7、GAMP 5/CSA）见调研文档 2.7；逐条业务场景的可审计能力对照见 docs/validation/README.md。

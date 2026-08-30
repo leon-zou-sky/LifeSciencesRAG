@@ -91,6 +91,7 @@ Drafting LLM: local Ollama (qwen3:4b, fully offline) or any OpenAI-compatible en
 | Document | Content |
 |---|---|
 | [docs/poc-overview-print.md](docs/poc-overview-print.md) | One-page printable overview + reference details |
+| [docs/compliance-system-design.md](docs/compliance-system-design.md) | **Two-system master plan**: business pipeline vs verification/compliance system — components, change control, governance rules, gap register |
 | [docs/design-overview-en.md](docs/design-overview-en.md) | **English design overview** (condensed) |
 | [docs/vector-db-construction-design.md](docs/vector-db-construction-design.md) | Construction design + 15 measurement-driven design iterations (Ch. 6) |
 | [docs/rag-engineering-standards.md](docs/rag-engineering-standards.md) | 17 engineering standards, each traced to a real incident |
