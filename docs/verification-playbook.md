@@ -47,7 +47,7 @@
 | `calibration_report.py` | 标定报告（Markdown+JSON 落 reports/） | 客户阈值建议无据可依 | MySQL | 客户标定时 |
 | `check_coverage.py` | 覆盖率对账：问询/病例涉及的药品 vs 库中说明书 | 召回天花板——排序救不了库里没有的东西 | MySQL + Milvus | 定期/补库后 |
 | `validate_citation.py` | 引用断言中间件（独立交付，任意 RAG 可用） | 别家 RAG 输出的幻觉引用 | 无（输入草稿+chunks） | 作为外挂中间件接 CI |
-| `gen_validation_pack.py` | 验证包证据自动采集（环境/模型 SHA/实跑归档） | 验证包手工拼凑、证据不可复现 | Milvus + MySQL | 出验证包时 |
+| `gen_validation_pack.py` | 验证包证据自动采集（环境/模型 SHA/实跑归档；`--with-generation` 含生成层 PQ 段） | 验证包手工拼凑、证据不可复现 | Milvus + MySQL（+Ollama 若带生成层） | 出验证包时 |
 | `scheduled_verification.py` | 每日持续验证调度器（五套件+三态+留痕+通知） | **时间维度漂移**：没人动系统但系统悄悄变了 | MySQL + Milvus + Ollama | launchd 每日 07:23 自动；也可手动 |
 
 ---
@@ -119,7 +119,8 @@ conda run -n py311 python scripts/reconcile_thresholds.py        # 对账
 ### 4.6 出验证包（GxP 交付）
 
 ```bash
-conda run -n py311 python scripts/gen_validation_pack.py         # 证据自动采集 → docs/validation/packs/
+conda run -n py311 python scripts/gen_validation_pack.py --executor <姓名> [--with-generation]
+# 证据自动采集 → docs/validation/packs/；--with-generation 追加生成层 PQ 段（需 Ollama 在线）
 # 模板签字页由人签署——机器只采证据，不出批准结论
 ```
 

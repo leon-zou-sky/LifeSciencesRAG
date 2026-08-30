@@ -111,12 +111,80 @@ def run_regression() -> tuple[str, int]:
     return out.strip(), proc.returncode
 
 
+def collect_generation(run_probes: bool) -> dict:
+    """生成层 PQ 证据（G-06 升格段）：契约版本/模型指纹/稳定性统计 + 可选实跑冒烟。
+    run_probes=False 时只归档配置与稳定性统计，不实跑（Ollama 不在线也能出包）"""
+    from src.llm import LLM_CONFIG, PROMPT_VERSION, model_digest
+
+    # 稳定性统计：每日持续验证的 answers 套件运行记录（时间维度证据，G-06 达标标准的数据源）
+    runs_file = _ROOT / "reports" / "scheduled" / "verify_runs.jsonl"
+    stats = {"pass": 0, "fail": 0, "skipped": 0, "first": None, "last": None}
+    if runs_file.exists():
+        for line in runs_file.read_text(encoding="utf-8").splitlines():
+            try:
+                run = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            for s in run.get("suites", []):
+                if s.get("suite") != "answers":
+                    continue
+                v = s.get("verdict")
+                if v in stats:
+                    stats[v] += 1
+                stats["first"] = stats["first"] or run.get("run_id")
+                stats["last"] = run.get("run_id")
+
+    probes_out, probes_rc = "（--with-generation 未指定，本次未实跑）", -1
+    if run_probes:
+        proc = subprocess.run(
+            [sys.executable, str(_ROOT / "scripts" / "test_answers.py")],
+            capture_output=True, text=True, cwd=_ROOT, timeout=1800,
+        )
+        probes_out = "\n".join(l for l in (proc.stdout + proc.stderr).splitlines()
+                               if not l.startswith("Loading weights:")).strip()
+        probes_rc = proc.returncode
+
+    return {
+        "prompt_version": PROMPT_VERSION,
+        "llm_model": LLM_CONFIG["model"],
+        "llm_digest": model_digest(),
+        "llm_temperature": LLM_CONFIG["temperature"],
+        "llm_max_retries": LLM_CONFIG["max_retries"],
+        "stability": stats,
+        "probes_output": probes_out,
+        "probes_exit": probes_rc,
+    }
+
+
+def render_generation_section(gen: dict, executed: bool) -> str:
+    """03_PQ 3.4 段渲染：配置指纹 + 稳定性统计 + 实跑归档（如执行）"""
+    s = gen["stability"]
+    lines = [
+        "| 字段 | 值 |",
+        "|---|---|",
+        f"| 输出契约 | {gen['prompt_version']}（JSON 结构契约，见设计文档 6.18） |",
+        f"| 生成模型 | {gen['llm_model']}（digest {gen['llm_digest']}，temperature={gen['llm_temperature']}，max_retries={gen['llm_max_retries']}） |",
+        f"| 冒烟探针 | config/answer_golden.json（6 条，断言五终态路由） |",
+        f"| 稳定性证据 | 持续验证记录 {s['first'] or '—'} ~ {s['last'] or '—'}："
+        f"pass {s['pass']} / fail {s['fail']} / infra-skipped {s['skipped']} |",
+        "",
+    ]
+    if executed:
+        lines += [f"实跑归档（exit code = {gen['probes_exit']}）：", "",
+                  "```", gen["probes_output"], "```"]
+    else:
+        lines.append(gen["probes_output"])
+    return "\n".join(lines)
+
+
 def main():
     parser = argparse.ArgumentParser(description="生成 GxP 验证包")
     parser.add_argument("--executor", required=True, help="验证执行人姓名（填入计划页）")
     parser.add_argument("--trigger", default="定期回归验证", help="触发原因（换模型重标定/定期评审/数据变更）")
     parser.add_argument("--skip-oq", action="store_true", help="日常回归：OQ 标定段标记为'本次未执行'（换模型时必须完整执行）")
     parser.add_argument("--skip-run", action="store_true", help="不实跑 regression（仅调试用）")
+    parser.add_argument("--with-generation", action="store_true",
+                        help="PQ 含生成层段：实跑 test_answers.py 冒烟并归档（需 Ollama 在线；G-06 升格后必带）")
     args = parser.parse_args()
 
     today = date.today().isoformat()
@@ -128,6 +196,13 @@ def main():
     reg_out, exit_code = ("（--skip-run 未执行）", -1) if args.skip_run else run_regression()
     pq_ok = exit_code == 0
     print(f"   exit code = {exit_code}（{'✅ 通过' if pq_ok else '❌ 未通过'}）")
+
+    print("②b 生成层证据（契约指纹/稳定性统计%s）…" % ("+实跑冒烟" if args.with_generation else ""))
+    gen = collect_generation(run_probes=args.with_generation)
+    gen_ok = gen["probes_exit"] == 0 if args.with_generation else True
+    if args.with_generation:
+        print(f"   冒烟 exit code = {gen['probes_exit']}（{'✅' if gen_ok else '❌'}）")
+    pq_ok = pq_ok and gen_ok
 
     th_yaml = iq["thresholds_yaml"]
     from src.thresholds import load_thresholds
@@ -172,6 +247,7 @@ def main():
             "r3": "✅ 无漂移" if pq_ok else "❌", "r4": "✅" if pq_ok else "❌",
             "pq_conclusion": "✅ 通过" if pq_ok else "❌ 不通过——禁止签字放行",
             "pq_result": "✅ 通过" if pq_ok else "❌ 不通过",
+            "generation_section": render_generation_section(gen, executed=args.with_generation),
         }),
         "04_signature.md": fill("04_signature.md", {
             **common,
