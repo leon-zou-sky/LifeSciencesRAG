@@ -81,14 +81,16 @@ LLM 起草层用本地 Ollama（qwen3:4b）或火山引擎 Ark 接口（`.env` �
 
 ## 文档地图
 
-| 文档 | 内容 |
-|---|---|
-| [docs/poc-overview-print.md](docs/poc-overview-print.md) | **方案速览（打印版）**：一页看懂 + 细节备查 |
-| [docs/compliance-system-design.md](docs/compliance-system-design.md) | **双体系总纲**：业务系统 × 验证合规体系分家设计——组成清单/变更控制/治理铁律/缺口台账 |
-| [docs/design-overview-en.md](docs/design-overview-en.md) | **Design overview (English, condensed)** |
-| [docs/vector-db-construction-design.md](docs/vector-db-construction-design.md) | 构建设计 + 第 6 章实测驱动的设计迭代（15 条） |
-| [docs/rag-engineering-standards.md](docs/rag-engineering-standards.md) | 代码工程规范 17 条（团队范本，每条带事故溯源） |
-| [docs/rag-industry-research.md](docs/rag-industry-research.md) | 设计依据调研：Veeva 美国/中国、医疗 RAG 同行、中美合规差异、四级验证门禁谱系（2.7） |
-| [docs/model-selection-recalibration.md](docs/model-selection-recalibration.md) | Embedding 模型选型与重构标定：换模型场景/两阶段重标定/国内方案对比/退出标准 + **附录 C 三模型实测（蓝绿重标定已全程验证）** |
-| [docs/drill-customer-calibration-2026-08-25.md](docs/drill-customer-calibration-2026-08-25.md) | 客户标定全流程演练 + 负对照实验：故意注入坏阈值验证闸门拦截行为（闸灵敏度图谱） |
-| [docs/validation/](docs/validation/README.md) | **GxP 验证包**：RTM 可追溯矩阵 + IQ/OQ/PQ 模板 + 签字页 + gen_validation_pack.py 证据自动采集 |
+| 类型 | 文档 | 内容 |
+|---|---|---|
+| 方案概述 | [docs/solution-overview.md](docs/solution-overview.md) | **全仓库导览**：定位/架构/实测指标/核心能力/设计细节 |
+| 体系设计 | [docs/compliance-system-design.md](docs/compliance-system-design.md) | **双体系总纲**：业务系统 × 验证合规体系分家设计——组成清单/变更控制/治理铁律/缺口台账 |
+| 概述（英文） | [docs/design-overview-en.md](docs/design-overview-en.md) | **Design overview (English, condensed)** |
+| 详细设计 | [docs/vector-db-construction-design.md](docs/vector-db-construction-design.md) | 构建设计 + 第 6 章实测驱动的设计迭代（18 条） |
+| 调研报告 | [docs/rag-industry-research.md](docs/rag-industry-research.md) | 设计依据调研：Veeva 美国/中国、医疗 RAG 同行、中美合规差异、四级验证门禁谱系（2.7） |
+| 专项调研 | [docs/pv-duplicate-detection-threshold-research.md](docs/pv-duplicate-detection-threshold-research.md) | PV 判重阈值/权重的统计学标定（vigiMatch 等五代方案谱系） |
+| 评估方案 | [docs/model-selection-recalibration.md](docs/model-selection-recalibration.md) | Embedding 模型选型与重构标定：换模型场景/两阶段重标定/国内方案对比/退出标准 + **附录 C 三模型实测（蓝绿重标定已全程验证）** |
+| 演练报告 | [docs/drill-customer-calibration-2026-08-25.md](docs/drill-customer-calibration-2026-08-25.md) | 客户标定全流程演练 + 负对照实验：故意注入坏阈值验证闸门拦截行为（闸灵敏度图谱） |
+| 工程规范 | [docs/rag-engineering-standards.md](docs/rag-engineering-standards.md) | 代码工程规范 17 条（团队范本，每条带事故溯源） |
+| 验证手册 | [docs/verification-playbook.md](docs/verification-playbook.md) | 18 个验证脚本编目：各自防什么问题/运行环境依赖/什么场景跑哪个/退出码契约 |
+| 验证包 | [docs/validation/](docs/validation/README.md) | **GxP 验证包**：RTM 可追溯矩阵 + IQ/OQ/PQ 模板 + 签字页 + gen_validation_pack.py 证据自动采集 |

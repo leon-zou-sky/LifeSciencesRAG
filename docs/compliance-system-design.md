@@ -50,7 +50,7 @@
    "草稿需复核"后缀由渲染层强制附加，机器不出"批准"结论。
 
 详细设计：[vector-db-construction-design.md](vector-db-construction-design.md)
-（第 1~6 章：数据分类、拆块、管道、15 条实测驱动迭代）。
+（第 1~6 章：数据分类、拆块、管道、18 条实测驱动迭代）。
 
 ---
 
@@ -93,6 +93,23 @@ SR 11-7 有效质疑（标定/终审分离）、Google ML Test Score、
 | 验证包自动采集 | `scripts/gen_validation_pack.py` → `packs/` | 批检验记录（机器采证据，人签字） |
 | 阈值变更审计链 | MySQL `threshold_history`（只增不改） | 变更控制记录 |
 | runbook 三纪律 | [model-selection-recalibration.md A.6](model-selection-recalibration.md) | SOP：理由栏禁预填 / 对账是收工条件 / 决策表 |
+
+### 3.4 持续验证（时间维度，2026-08-30 落地）
+
+变更时验证只能抓住"有人动了系统"；时间维度的漂移——容器重启后数据异常、
+模型文件被动过、阈值被绕开流程改了——只有定期重跑才能抓到。
+
+| 组件 | 位置 | 职责 |
+|---|---|---|
+| 调度器 | `scripts/scheduled_verification.py` | 五套件（reconcile/regression/cases/pii/answers）依次执行，exit code 即结论，不解析输出文本 |
+| 三态总结论 | 同上 | green=全过（exit 0）/ red=有失败（1）/ **incomplete=无失败但有跳过**（2）——skipped≠绿，全绿报告必须意味着每项真跑过 |
+| 基础设施前置检查 | 同上 | MySQL/Milvus/Ollama 探测，依赖不可达的套件记 skipped 而非 failed |
+| 定时承载 | `scripts/install_daily_verify.sh`（launchd） | 每日 07:23 本地时间；合盖错过唤醒后补跑 |
+| 留痕 | `reports/scheduled/verify_runs.jsonl` + 每次全量 log | 证据目录（git 排除），任何一次结论可回放 |
+| 告警 | macOS 桌面通知 | **机器只报告"验证失败需人工处置"，不自动重跑/回滚/修阈值**——自动处置动作永远是人发起（4.2 铁律④的延伸） |
+
+> 全部验证脚本的逐件编目（防什么/环境依赖/场景操作手册）见
+> [verification-playbook.md](verification-playbook.md)。
 
 ---
 
@@ -158,7 +175,7 @@ prompt:  PROMPT_VERSION（gp-x.y，进每条 trace）
 | 运行时护栏五件套 | ✅ 全量在线 | L3 规则版→NER 增强（G-09） |
 | 变更时验证六件套 | ✅ 全绿（生成层冒烟 6/6、回归、病例、PII 20/20、对账 7 键） | 生成层探针冒烟级未升 PQ（G-06，待 trace 积累） |
 | 文档证据层 | ✅ RTM/模板/采集可用 | 电子签名（Part 11）未实现；模板未经真实 QA 评审固化 |
-| 再验证触发器 | ⚠️ 手动 | 生产形态=漂移超阈自动告警触发重标定（ISPE 持续验证闭环） |
+| 再验证触发器 | ✅ 半自动（2026-08-30，见 3.4） | 每日定时全量验证+三态告警；自动重标定仍由人工发起（有意保留） |
 | 偏差测试 | ❌ 未做 | GAMP AI Guide 要求：标定集分层偏差分析（渠道/年龄/药品类别） |
 | ISPE L5 毒性/语气 | ❌ 未做 | 内部草稿场景，优先级低，有意裁剪 |
 
@@ -173,3 +190,4 @@ prompt:  PROMPT_VERSION（gp-x.y，进每条 trace）
 |---|---|
 | 2026-08-30 | 初版：应"两套体系分开设计说明"要求，把散落于设计文档第 8 章、调研 2.7/2.9、runbook、RTM 的合规内容收拢为体系总纲；新增内容仅为 4.1 变更触发表与 4.2 铁律汇总，其余均为既有文档索引 |
 | 2026-08-30 | 补 4.4 责任-执行分离与风险边界：多客户交付前提（引擎通用/方案每客户一份）+ 风险边界六道机制（开发方担规格内正确性，不担医学判断对错） |
+| 2026-08-30 | 补 3.4 持续验证层：scheduled_verification.py + launchd 每日定时 + 三态判定（green/red/incomplete）+ 机器只报告不处置；§5 再验证触发器缺口关闭为半自动 |

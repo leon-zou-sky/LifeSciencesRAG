@@ -88,14 +88,16 @@ Drafting LLM: local Ollama (qwen3:4b, fully offline) or any OpenAI-compatible en
 
 ## Documentation
 
-| Document | Content |
-|---|---|
-| [docs/poc-overview-print.md](docs/poc-overview-print.md) | One-page printable overview + reference details |
-| [docs/compliance-system-design.md](docs/compliance-system-design.md) | **Two-system master plan**: business pipeline vs verification/compliance system — components, change control, governance rules, gap register |
-| [docs/design-overview-en.md](docs/design-overview-en.md) | **English design overview** (condensed) |
-| [docs/vector-db-construction-design.md](docs/vector-db-construction-design.md) | Construction design + 15 measurement-driven design iterations (Ch. 6) |
-| [docs/rag-engineering-standards.md](docs/rag-engineering-standards.md) | 17 engineering standards, each traced to a real incident |
-| [docs/rag-industry-research.md](docs/rag-industry-research.md) | Design-basis research: Veeva US/China, medical RAG peers, US-China compliance gaps, validation-gate lineage, AI-output validation layer (ISPE five-layer mapping) |
-| [docs/model-selection-recalibration.md](docs/model-selection-recalibration.md) | Embedding model selection & recalibration: two-stage process / China model comparison / exit criteria + Appendix C three-model benchmark |
-| [docs/drill-customer-calibration-2026-08-25.md](docs/drill-customer-calibration-2026-08-25.md) | Customer calibration drill + negative-control experiments: deliberately injected bad thresholds to verify gate interception (gate sensitivity map) |
-| [docs/validation/](docs/validation/README.md) | **GxP validation package**: RTM traceability matrix + IQ/OQ/PQ templates + signature page + automated evidence collection |
+| Type | Document | Content |
+|---|---|---|
+| Overview | [docs/solution-overview.md](docs/solution-overview.md) | Solution overview (Chinese, condensed): positioning / architecture / measured metrics / capabilities |
+| Overview (EN) | [docs/design-overview-en.md](docs/design-overview-en.md) | **English design overview** (condensed) |
+| System design | [docs/compliance-system-design.md](docs/compliance-system-design.md) | **Two-system master plan**: business pipeline vs verification/compliance system — components, change control, governance rules, gap register |
+| Detailed design | [docs/vector-db-construction-design.md](docs/vector-db-construction-design.md) | Construction design + 18 measurement-driven design iterations (Ch. 6) |
+| Research | [docs/rag-industry-research.md](docs/rag-industry-research.md) | Design-basis research: Veeva US/China, medical RAG peers, US-China compliance gaps, validation-gate lineage, AI-output validation layer (ISPE five-layer mapping) |
+| Research | [docs/pv-duplicate-detection-threshold-research.md](docs/pv-duplicate-detection-threshold-research.md) | PV duplicate-detection threshold/weight calibration research (vigiMatch et al., five generations of approaches) |
+| Evaluation plan | [docs/model-selection-recalibration.md](docs/model-selection-recalibration.md) | Embedding model selection & recalibration: two-stage process / China model comparison / exit criteria + Appendix C three-model benchmark |
+| Drill report | [docs/drill-customer-calibration-2026-08-25.md](docs/drill-customer-calibration-2026-08-25.md) | Customer calibration drill + negative-control experiments: deliberately injected bad thresholds to verify gate interception (gate sensitivity map) |
+| Standards | [docs/rag-engineering-standards.md](docs/rag-engineering-standards.md) | 17 engineering standards, each traced to a real incident |
+| Verification playbook | [docs/verification-playbook.md](docs/verification-playbook.md) | All 18 verification scripts cataloged: what each guards against, runtime dependencies, when to run which, exit-code contract |
+| Validation package | [docs/validation/](docs/validation/README.md) | **GxP validation package**: RTM traceability matrix + IQ/OQ/PQ templates + signature page + automated evidence collection |
