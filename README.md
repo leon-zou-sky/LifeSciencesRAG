@@ -37,7 +37,7 @@ Three components that make LLM/RAG output verifiable — designed to work as a s
 ## Quick Start
 
 ```bash
-# 1. Start dependencies (Milvus :19531 / Neo4j :7687 / MySQL :3307)
+# 1. Start dependencies (Milvus :19531 / Neo4j :7687 / MySQL :3308)
 docker compose up -d
 
 # 2. Ingestion (simulated multi-format intake: PDF/CSV/TXT/XML → MySQL → Milvus)

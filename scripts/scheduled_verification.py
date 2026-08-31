@@ -21,6 +21,7 @@
 本脚本本身无任何调度逻辑，手动跑与定时跑行为一致。
 """
 import json
+import os
 import socket
 import subprocess
 import sys
@@ -44,7 +45,7 @@ _SUITES = [
 
 # 基础设施探测：socket/HTTP 各归其位，超时要短——探测不是压测
 _INFRA_PROBES = {
-    "mysql":  ("tcp",  ("localhost", 3307)),
+    "mysql":  ("tcp",  ("localhost", int(os.environ.get("LS_RAG_MYSQL_PORT", "3308")))),
     "milvus": ("tcp",  ("localhost", 19531)),
     "ollama": ("http", "http://localhost:11434/api/tags"),
 }

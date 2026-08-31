@@ -56,7 +56,7 @@
 
 | 依赖 | 需要它的脚本 | 怎么起 |
 |---|---|---|
-| MySQL (:3307) | reconcile / set_threshold / init_thresholds / import_calibration_pairs / calibration_report / check_coverage / gen_validation_pack | `docker compose up -d`（项目根目录） |
+| MySQL (:3308) | reconcile / set_threshold / init_thresholds / import_calibration_pairs / calibration_report / check_coverage / gen_validation_pack | `docker compose up -d`（项目根目录） |
 | Milvus (:19531) | regression / test_answers / test_cases / test_inquiries / calibrate / measure_* / rebuild_shadow / check_coverage | 同上（⚠️ demo 用 :19531，与 WeatherAgent :19530 严格隔离） |
 | Ollama (:11434) | test_answers / answer.py | 打开 Ollama.app（或常驻终端 `ollama serve`） |
 | 无外部依赖 | test_pii / validate_citation / scheduled_verification 自身 | 直接跑 |

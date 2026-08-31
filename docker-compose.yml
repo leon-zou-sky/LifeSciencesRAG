@@ -91,7 +91,7 @@ services:
       MYSQL_DATABASE: ls_rag
       TZ: Asia/Shanghai
     ports:
-      - "3307:3306"   # 避开本机默认 3306
+      - "${LS_RAG_MYSQL_PORT:-3308}:3306"   # 避开本机 3306 与 WeatherAgent mysql-crm 的 3307
     volumes:
       - ./volumes/mysql:/var/lib/mysql
       - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro

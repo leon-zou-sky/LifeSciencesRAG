@@ -29,7 +29,7 @@
 ## 快速开始
 
 ```bash
-# 1. 起全部依赖（Milvus :19531 / Neo4j :7687 / MySQL :3307）
+# 1. 起全部依赖（Milvus :19531 / Neo4j :7687 / MySQL :3308）
 docker compose up -d
 
 # 2. 数据采集（模拟真实多格式接入：PDF/CSV/TXT/XML → MySQL → Milvus）
