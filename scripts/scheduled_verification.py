@@ -7,8 +7,12 @@
 
   - 依次执行五个验证套件，以各自 exit code 判定（0=绿 1=红 2=基础设施不可达），
     不解析输出文本——exit code 是唯一契约
-  - 前置基础设施检查（MySQL/Milvus/Ollama）：依赖不可达的套件记 skipped，
-    skipped ≠ green——全绿报告必须意味着每一项真的跑过
+  - 前置基础设施检查（MySQL/Milvus/Ollama）：服务级探测（真实执行一次
+    查询/列表/HTTP 请求），不是只探 TCP 端口——容器重启窗口里端口转发
+    先于服务进程就绪，只探 TCP 会把"重启中"误判为"在线"，套件随后真实
+    连接超时被判 fail，infra 过渡态被误报成 red（2026-09-09/09-10 实测）。
+    依赖不可达的套件记 skipped，skipped ≠ green——全绿报告必须意味着
+    每一项真的跑过
   - 三态总结论：green（全过）/ red（有失败）/ incomplete（无失败但有跳过）
     → exit 0 / 1 / 2（与 reconcile_thresholds.py 语义对齐）
   - 留痕：reports/scheduled/verify_runs.jsonl 追加一行摘要 + 每套件完整输出
@@ -21,8 +25,6 @@
 本脚本本身无任何调度逻辑，手动跑与定时跑行为一致。
 """
 import json
-import os
-import socket
 import subprocess
 import sys
 import time
@@ -31,6 +33,7 @@ from datetime import datetime
 from pathlib import Path
 
 _ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(_ROOT))  # src/ 可导入（探测函数用 src.db）
 _REPORT_DIR = _ROOT / "reports" / "scheduled"
 
 # (名称, 脚本, 依赖的基础设施, 超时秒)
@@ -43,24 +46,47 @@ _SUITES = [
     ("answers",    "scripts/test_answers.py",         {"milvus", "ollama"}, 1800),
 ]
 
-# 基础设施探测：socket/HTTP 各归其位，超时要短——探测不是压测
+# 基础设施探测：服务级 readiness，超时要短——探测不是压测。
+# 只探 TCP 端口不够：容器重启/预热窗口里端口已监听但服务还不能响应，
+# 必须真实执行一次最小请求（SELECT 1 / list_collections / HTTP GET）才算在线
+def _probe_mysql() -> bool:
+    try:
+        from src.db import get_conn
+        with get_conn() as conn, conn.cursor() as cur:
+            cur.execute("SELECT 1")
+            cur.fetchone()
+        return True
+    except Exception:
+        return False
+
+
+def _probe_milvus() -> bool:
+    try:
+        from pymilvus import MilvusClient
+        client = MilvusClient(uri="http://localhost:19531", timeout=5)
+        client.list_collections()
+        return True
+    except Exception:
+        return False
+
+
+def _probe_ollama() -> bool:
+    try:
+        with urllib.request.urlopen("http://localhost:11434/api/tags", timeout=3) as resp:
+            return resp.status == 200
+    except Exception:
+        return False
+
+
 _INFRA_PROBES = {
-    "mysql":  ("tcp",  ("localhost", int(os.environ.get("LS_RAG_MYSQL_PORT", "3308")))),
-    "milvus": ("tcp",  ("localhost", 19531)),
-    "ollama": ("http", "http://localhost:11434/api/tags"),
+    "mysql": _probe_mysql,
+    "milvus": _probe_milvus,
+    "ollama": _probe_ollama,
 }
 
 
 def probe_infra(name: str) -> bool:
-    kind, target = _INFRA_PROBES[name]
-    try:
-        if kind == "tcp":
-            with socket.create_connection(target, timeout=3):
-                return True
-        with urllib.request.urlopen(target, timeout=3) as resp:
-            return resp.status == 200
-    except Exception:
-        return False
+    return _INFRA_PROBES[name]()
 
 
 def run_suite(name: str, script: str, timeout: int) -> dict:
