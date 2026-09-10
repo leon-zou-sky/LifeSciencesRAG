@@ -11,6 +11,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.thresholds import load_model_path
 
 import logging
+from src.embedding_schema import embedding_dimension
 from src.milvus_collections import create_collections, insert_chunks, get_client
 from src.chunking import chunk_document, generate_chunk_id
 from src.sample_data import get_all_documents
@@ -30,13 +31,16 @@ def load_embedding_model():
 
 
 def main():
+    # 必须先加载模型：Collection schema 的维度由实际模型决定，不能使用历史常量。
+    model = load_embedding_model()
+
     # 1. 连接 Milvus
     client = get_client()
     logger.info("Milvus 连接成功")
 
     # 2. 创建 Collection
     logger.info("创建 Collection...")
-    create_collections(client)
+    create_collections(client, dim=embedding_dimension(model))
 
     # 3. 拆块
     docs = get_all_documents()
@@ -49,7 +53,6 @@ def main():
     logger.info(f"共拆分 {len(all_chunks)} 个 chunk")
 
     # 4. 生成 Embedding
-    model = load_embedding_model()
     texts = [c["text"] for c in all_chunks]
     logger.info("生成 Embedding...")
     embeddings = model.encode(texts, normalize_embeddings=True).tolist()

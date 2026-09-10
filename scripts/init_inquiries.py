@@ -21,6 +21,7 @@ from datetime import datetime
 from pymilvus import MilvusClient
 from sentence_transformers import SentenceTransformer
 
+from src.embedding_schema import embedding_dimension
 from src.milvus_collections import create_inquiry_collection
 from src.db import get_conn
 from src.messy_inquiries import BASE_INQUIRIES
@@ -116,7 +117,7 @@ def main():
     model = SentenceTransformer(_MODEL_PATH)
     client = MilvusClient(uri=MILVUS_URI)
 
-    create_inquiry_collection(client, drop=args.rebuild)
+    create_inquiry_collection(client, drop=args.rebuild, dim=embedding_dimension(model))
 
     if args.rebuild:
         with get_conn() as conn, conn.cursor() as cur:

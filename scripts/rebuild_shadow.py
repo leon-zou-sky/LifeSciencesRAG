@@ -24,7 +24,10 @@ from pymilvus import MilvusClient
 from sentence_transformers import SentenceTransformer
 
 from src.db import get_conn
-from src.milvus_collections import COLLECTIONS, create_collections, create_inquiry_collection, shadow_name
+from src.embedding_schema import embedding_dimension
+from src.milvus_collections import (
+    COLLECTIONS, create_collections, create_inquiry_collection, shadow_name,
+)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
@@ -129,8 +132,7 @@ def main():
         return
 
     model = SentenceTransformer(args.model_path)
-    dim = model.get_embedding_dimension() if hasattr(model, "get_embedding_dimension") \
-        else model.get_sentence_embedding_dimension()
+    dim = embedding_dimension(model)
     logger.info(f"模型: {args.model_path}（维度 {dim}），影子标签: __{args.tag}")
 
     n_docs = build_doc_shadows(model, client, args.tag, dim)

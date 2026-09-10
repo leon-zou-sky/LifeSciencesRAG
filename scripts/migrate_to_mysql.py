@@ -27,6 +27,7 @@ from pymilvus import MilvusClient
 from sentence_transformers import SentenceTransformer
 
 from src.chunking import chunk_document
+from src.embedding_schema import embedding_dimension
 from src.milvus_collections import COLLECTIONS, create_collections
 from src.db import get_conn
 from src.sample_data import get_all_documents
@@ -167,7 +168,7 @@ def main():
 
     # ② 重建 Milvus（影子索引可随意重建，源在 MySQL）
     if not args.sync_only:
-        create_collections(client)  # drop + create 所有文档 Collection
+        create_collections(client, dim=embedding_dimension(model))  # 维度必须与当前模型同源
         # 重建后必须重置同步标记，否则已同步过的块不会重新进影子库
         with get_conn() as conn, conn.cursor() as cur:
             cur.execute("UPDATE document_chunks SET embedding_updated_at=NULL")

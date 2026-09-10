@@ -7,15 +7,15 @@
 import logging
 from pymilvus import MilvusClient, DataType
 
+from src.embedding_schema import assert_collection_dimension
+
 logger = logging.getLogger(__name__)
-
-EMBEDDING_DIM = 1024  # BGE-large-zh-v1.5
-
 
 def shadow_name(base: str, tag: str) -> str:
     """蓝绿影子命名：<base>__<tag>（tag 一般为模型标识，如 bgesmall）。
     不同模型的向量维度/分数分布不同，严禁混住同一 Collection（重标定 runbook A.1①）"""
     return f"{base}__{tag}"
+
 
 # Collection 配置：每个文档类型一个 Collection
 COLLECTIONS = {
@@ -38,7 +38,7 @@ COLLECTIONS = {
 }
 
 
-def _create_schema(client: MilvusClient, dim: int = EMBEDDING_DIM):
+def _create_schema(client: MilvusClient, dim: int):
     """通用 Schema（所有 Collection 共用字段）。dim 随模型维度传入（蓝绿影子可能与现役不同维度）"""
     schema = client.create_schema(auto_id=False, enable_dynamic_field=False)
 
@@ -54,11 +54,12 @@ def _create_schema(client: MilvusClient, dim: int = EMBEDDING_DIM):
     return schema
 
 
-def create_collections(client: MilvusClient, dim: int = EMBEDDING_DIM, suffix: str = ""):
+def create_collections(client: MilvusClient, *, dim: int, suffix: str = ""):
     """创建所有 Collection。suffix 用于蓝绿影子（如 "__bgesmall"），dim 随模型维度传入"""
     for name in COLLECTIONS:
         full = f"{name}{suffix}"
         if client.has_collection(full):
+            assert_collection_dimension(client, full, dim)
             client.drop_collection(full)
             logger.info(f"  删除旧 Collection: {full}")
 
@@ -114,9 +115,10 @@ client = None
 
 
 def create_inquiry_collection(client: MilvusClient, drop: bool = False,
-                              name: str = "mi_inquiries", dim: int = EMBEDDING_DIM):
+                              name: str = "mi_inquiries", *, dim: int):
     """创建医学问询 Collection（事件流数据，schema 与文档类不同）。name/dim 支持蓝绿影子"""
     if client.has_collection(name):
+        assert_collection_dimension(client, name, dim)
         if not drop:
             logger.info(f"  Collection 已存在: {name}")
             return
